@@ -166,7 +166,7 @@ namespace Eve.TapToClick
                             if (this.Visible)
                             {
                                 maxPressureValueLabel.Text = maxTapPressure.ToString();
-                                deltaDistanceLabel.Text = deltaDistance.ToString();
+                                deltaDistanceLabel.Text = Math.Truncate(deltaDistance).ToString();
                                 contactDurationLabel.Text = $"{Math.Truncate(tapDurationMilliseconds)} ms";
                                 triggerHitCheckbox.Checked = triggerHit;
                                 twoFingerCheckbox.Checked = twoFinger;
