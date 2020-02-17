@@ -13,6 +13,13 @@ Currently, only single-finger tap (for left click) and double-finger tap (for ri
 
 If you have issues or questions, open an issue and I'll try to help you out. If you want to improve it, feel free to open a pull request.
 
+## Important
+**For best results, run this program as administrator.** Otherwise, some applications (I think ones that are run as administrator) will ignore the injected inputs.
+
+**It is possible anti-virus apps may block the app from injecting mouse clicks.** This is because some malware uses the same method to maliciously control a victim PC. You may need to "allow" this program in your anti-virus software.
+
+**I do not recommend using this when playing games that use anti-cheat features**. While I can't be completely sure, I suspect some anti-cheat software will flag the injected inputs as macroing software. If you get a ban because of this, I'm not responsible.
+
 ## How to use
 Currently, there is no installer. Just [download the latest release](https://github.com/megabytefisher/Eve.TapToClick/releases), then unzip and run Eve.TapToClick.exe. 
 
@@ -25,10 +32,3 @@ Max Tap Milliseconds | The maximum time a contact can be active and it still be 
 Max Tap Distance | The maximum distance the contact can move and it still be considered a tap.
 
 Basically, for an input to be considered a tap, it needs to exceed the minimum pressure, then reach the tap pressure, then fall back below the minimum pressure within the max tap milliseconds while not traveling farther than the max tap distance.
-
-## Important
-**For best results, run this program as administrator.** Otherwise, some applications (I think ones that are run as administrator) will ignore the injected inputs.
-
-**It is possible anti-virus apps may block the app from injecting mouse clicks.** This is because some malware uses the same method to maliciously control a victim PC. You may need to "allow" this program in your anti-virus software.
-
-**I do not recommend using this when playing games that use anti-cheat features**. While I can't be completely sure, I suspect some anti-cheat software will flag the injected inputs as macroing software. If you get a ban because of this, I'm not responsible.
