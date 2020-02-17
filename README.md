@@ -16,6 +16,16 @@ If you have issues or questions, open an issue and I'll try to help you out. If 
 ## How to use
 Currently, there is no installer. Just [download the latest release](https://github.com/megabytefisher/Eve.TapToClick/releases), then unzip and run Eve.TapToClick.exe. 
 
+## Configuration
+Value Name | Description/What it does
+--- | ---
+Min Pressure Detection Threshold | The minimum pressure reading that must be read to consider the contact "active". Anything below this pressure is completely ignored. This should be as low as possible, but setting it too low (i.e. 1) can cause the X/Y position readings to come back with high variance. This may push what **should** have been a tap over the max distance threshold.
+Tap Pressure Threshold | The minimum pressure that must be met to consider the input a tap.
+Max Tap Milliseconds | The maximum time a contact can be active and it still be considered a tap.
+Max Tap Distance | The maximum distance the contact can move and it still be considered a tap.
+
+Basically, for an input to be considered a tap, it needs to exceed the minimum pressure, then reach the tap pressure, then fall back below the minimum pressure within the max tap milliseconds while not traveling farther than the max tap distance.
+
 ## Important
 **For best results, run this program as administrator.** Otherwise, some applications (I think ones that are run as administrator) will ignore the injected inputs.
 
