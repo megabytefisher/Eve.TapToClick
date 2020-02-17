@@ -13,8 +13,10 @@ Currently, only single-finger tap (for left click) and double-finger tap (for ri
 
 If you have issues or questions, open an issue and I'll try to help you out. If you want to improve it, feel free to open a pull request.
 
-## Important
+## How to use
+Currently, there is no installer. Just [download the latest release](https://github.com/megabytefisher/Eve.TapToClick/releases), then unzip and run Eve.TapToClick.exe. 
 
+## Important
 **For best results, run this program as administrator.** Otherwise, some applications (I think ones that are run as administrator) will ignore the injected inputs.
 
 **It is possible anti-virus apps may block the app from injecting mouse clicks.** This is because some malware uses the same method to maliciously control a victim PC. You may need to "allow" this program in your anti-virus software.
