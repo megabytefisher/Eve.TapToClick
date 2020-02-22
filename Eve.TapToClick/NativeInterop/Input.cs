@@ -7,19 +7,23 @@ using System.Threading.Tasks;
 
 namespace Eve.TapToClick.NativeInterop
 {
-    [StructLayout(LayoutKind.Explicit)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct Input
     {
-        [FieldOffset(0)]
         public InputType Type;
+        public InputUnion InputValue;
 
-        [FieldOffset(4)]
-        public MouseInput MouseInput;
+        [StructLayout(LayoutKind.Explicit)]
+        public struct InputUnion
+        {
+            [FieldOffset(0)]
+            internal MouseInput MouseInput;
 
-        [FieldOffset(4)]
-        public KeyboardInput KeyboardInput;
+            [FieldOffset(0)]
+            internal KeyboardInput KeyboardInput;
 
-        [FieldOffset(4)]
-        public HardwareInput HardwareInput;
+            [FieldOffset(0)]
+            internal HardwareInput HardwareInput;
+        }
     }
 }

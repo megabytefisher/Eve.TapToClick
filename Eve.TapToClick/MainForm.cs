@@ -214,17 +214,23 @@ namespace Eve.TapToClick
             User32.SendInput(new Input
             {
                 Type = InputType.Mouse,
-                MouseInput = new MouseInput
+                InputValue = new Input.InputUnion
                 {
-                    Flags = MouseInputFlag.LeftDown
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.LeftDown
+                    }
                 }
             },
             new Input
             {
                 Type = InputType.Mouse,
-                MouseInput = new MouseInput
+                InputValue = new Input.InputUnion
                 {
-                    Flags = MouseInputFlag.LeftUp
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.LeftUp
+                    }
                 }
             });
         }
@@ -234,17 +240,23 @@ namespace Eve.TapToClick
             User32.SendInput(new Input
             {
                 Type = InputType.Mouse,
-                MouseInput = new MouseInput
+                InputValue = new Input.InputUnion
                 {
-                    Flags = MouseInputFlag.RightDown
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.RightDown
+                    }
                 }
             },
             new Input
             {
                 Type = InputType.Mouse,
-                MouseInput = new MouseInput
+                InputValue = new Input.InputUnion
                 {
-                    Flags = MouseInputFlag.RightUp
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.RightUp
+                    }
                 }
             });
         }
