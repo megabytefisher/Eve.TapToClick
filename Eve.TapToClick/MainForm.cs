@@ -305,7 +305,7 @@ namespace Eve.TapToClick
             applyConfigButton.Enabled = false;
         }
 
-        private void detectionThresholdTextBox_TextChanged(object sender, EventArgs e)
+        private void configTextBox_TextChanged(object sender, EventArgs e)
         {
             applyConfigButton.Enabled = true;
         }

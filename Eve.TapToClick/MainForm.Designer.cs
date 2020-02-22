@@ -331,6 +331,7 @@
             this.maxTapDistanceTextBox.Name = "maxTapDistanceTextBox";
             this.maxTapDistanceTextBox.Size = new System.Drawing.Size(185, 20);
             this.maxTapDistanceTextBox.TabIndex = 7;
+            this.maxTapDistanceTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label10
             // 
@@ -346,6 +347,7 @@
             this.maxTapMillisecondsTextBox.Name = "maxTapMillisecondsTextBox";
             this.maxTapMillisecondsTextBox.Size = new System.Drawing.Size(185, 20);
             this.maxTapMillisecondsTextBox.TabIndex = 5;
+            this.maxTapMillisecondsTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label9
             // 
@@ -362,6 +364,7 @@
             this.triggerThresholdTextBox.Name = "triggerThresholdTextBox";
             this.triggerThresholdTextBox.Size = new System.Drawing.Size(185, 20);
             this.triggerThresholdTextBox.TabIndex = 3;
+            this.triggerThresholdTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label7
             // 
@@ -378,7 +381,7 @@
             this.detectionThresholdTextBox.Name = "detectionThresholdTextBox";
             this.detectionThresholdTextBox.Size = new System.Drawing.Size(185, 20);
             this.detectionThresholdTextBox.TabIndex = 1;
-            this.detectionThresholdTextBox.TextChanged += new System.EventHandler(this.detectionThresholdTextBox_TextChanged);
+            this.detectionThresholdTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label5
             // 
