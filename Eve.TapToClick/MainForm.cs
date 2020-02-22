@@ -1,4 +1,6 @@
 ﻿using Eve.TapToClick.NativeInterop;
+using Microsoft.Win32;
+using Microsoft.Win32.TaskScheduler;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +9,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Eve.TapToClick
@@ -15,6 +16,8 @@ namespace Eve.TapToClick
     public partial class MainForm : Form
     {
         private AppConfiguration config;
+
+        private bool initialized = false;
 
         private DateTime? detectionStart;
         private bool triggerHit;
@@ -24,10 +27,11 @@ namespace Eve.TapToClick
         private uint maxTapPressure;
         private double deltaDistance;
 
+        private const string StartupTaskName = "Start Eve.TapToClick";
+
         public MainForm()
         {
             InitializeComponent();
-
             config = AppConfiguration.Instance;
         }
 
@@ -278,7 +282,11 @@ namespace Eve.TapToClick
             LoadConfigValues();
             applyConfigButton.Enabled = false;
 
-            Hide();
+            // Check if we're already set to auto-run on system startup
+            if (TaskService.Instance.GetTask(StartupTaskName) != null)
+                startupCheckbox.Checked = true;
+
+            initialized = true;
         }
 
         private void SaveConfigValues()
@@ -347,6 +355,42 @@ namespace Eve.TapToClick
             Show();
             WindowState = FormWindowState.Normal;
             Activate();
+        }
+
+        private void startupCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            // If the form isn't done loading, ignore change events.
+            if (!initialized)
+                return;
+
+            // Delete the existing task, if there's one.
+            TaskService.Instance.RootFolder.DeleteTask(StartupTaskName, false);
+
+            // If we're checked, add the task.
+            // Just a note: we use task scheduler here as opposed to the "Startup" folder
+            // or the registry, because those solutions will cause UAC prompt on startup.
+            if (startupCheckbox.Checked)
+            {
+                TaskDefinition startupTaskDefinition = TaskService.Instance.NewTask();
+                startupTaskDefinition.RegistrationInfo.Description = "Starts Eve.TapToClick on system startup";
+                startupTaskDefinition.Principal.LogonType = TaskLogonType.InteractiveToken;
+                startupTaskDefinition.Principal.RunLevel = TaskRunLevel.Highest;
+
+                startupTaskDefinition.Triggers.Add(new LogonTrigger());
+                startupTaskDefinition.Actions.Add(new ExecAction(Application.ExecutablePath));
+
+                TaskService.Instance.RootFolder.RegisterTaskDefinition(StartupTaskName, startupTaskDefinition);
+            }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            // Should we start minimized?
+            // We do this in the "Shown" event handle, because
+            // the "Resize" event isn't fired when we do this
+            // inside the "Load" event handler.
+            if (Environment.GetCommandLineArgs().Any(s => s.ToLower() == "--minimize"))
+                WindowState = FormWindowState.Minimized;
         }
     }
 }

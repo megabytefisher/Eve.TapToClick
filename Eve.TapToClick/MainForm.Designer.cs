@@ -63,10 +63,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.detectionThresholdTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.settingsGroupBox = new System.Windows.Forms.GroupBox();
+            this.startupCheckbox = new System.Windows.Forms.CheckBox();
             this.notifyIconContextMenuStrip.SuspendLayout();
             this.readingsDisplay.SuspendLayout();
             this.lastTapDisplay.SuspendLayout();
             this.configGroupBox.SuspendLayout();
+            this.settingsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -304,7 +307,7 @@
             this.configGroupBox.Size = new System.Drawing.Size(197, 203);
             this.configGroupBox.TabIndex = 2;
             this.configGroupBox.TabStop = false;
-            this.configGroupBox.Text = "Configuration";
+            this.configGroupBox.Text = "Detection/Tap Configuration";
             // 
             // applyConfigButton
             // 
@@ -392,11 +395,33 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Min Pressure Detection Threshold";
             // 
+            // settingsGroupBox
+            // 
+            this.settingsGroupBox.Controls.Add(this.startupCheckbox);
+            this.settingsGroupBox.Location = new System.Drawing.Point(535, 12);
+            this.settingsGroupBox.Name = "settingsGroupBox";
+            this.settingsGroupBox.Size = new System.Drawing.Size(174, 203);
+            this.settingsGroupBox.TabIndex = 3;
+            this.settingsGroupBox.TabStop = false;
+            this.settingsGroupBox.Text = "Application Settings";
+            // 
+            // startupCheckbox
+            // 
+            this.startupCheckbox.AutoSize = true;
+            this.startupCheckbox.Location = new System.Drawing.Point(8, 19);
+            this.startupCheckbox.Name = "startupCheckbox";
+            this.startupCheckbox.Size = new System.Drawing.Size(93, 17);
+            this.startupCheckbox.TabIndex = 0;
+            this.startupCheckbox.Text = "Run at startup";
+            this.startupCheckbox.UseVisualStyleBackColor = true;
+            this.startupCheckbox.CheckedChanged += new System.EventHandler(this.startupCheckbox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 227);
+            this.ClientSize = new System.Drawing.Size(721, 227);
+            this.Controls.Add(this.settingsGroupBox);
             this.Controls.Add(this.configGroupBox);
             this.Controls.Add(this.lastTapDisplay);
             this.Controls.Add(this.readingsDisplay);
@@ -408,6 +433,7 @@
             this.Text = "Eve.TapToClick Configuration";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.notifyIconContextMenuStrip.ResumeLayout(false);
             this.readingsDisplay.ResumeLayout(false);
@@ -416,6 +442,8 @@
             this.lastTapDisplay.PerformLayout();
             this.configGroupBox.ResumeLayout(false);
             this.configGroupBox.PerformLayout();
+            this.settingsGroupBox.ResumeLayout(false);
+            this.settingsGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -455,6 +483,8 @@
         private System.Windows.Forms.ContextMenuStrip notifyIconContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem notifyIconExitMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notifyIconConfigureMenuItem;
+        private System.Windows.Forms.GroupBox settingsGroupBox;
+        private System.Windows.Forms.CheckBox startupCheckbox;
     }
 }
 
