@@ -27,8 +27,6 @@ namespace Eve.TapToClick
         private uint maxTapPressure;
         private double deltaDistance;
 
-        private const string StartupTaskName = "Start Eve.TapToClick";
-
         public MainForm()
         {
             InitializeComponent();
@@ -283,7 +281,7 @@ namespace Eve.TapToClick
             applyConfigButton.Enabled = false;
 
             // Check if we're already set to auto-run on system startup
-            if (TaskService.Instance.GetTask(StartupTaskName) != null)
+            if (AutoRun.StartupTaskExists())
                 startupCheckbox.Checked = true;
 
             initialized = true;
@@ -363,23 +361,14 @@ namespace Eve.TapToClick
             if (!initialized)
                 return;
 
-            // Delete the existing task, if there's one.
-            TaskService.Instance.RootFolder.DeleteTask(StartupTaskName, false);
+            AutoRun.RemoveStartupTask();
 
             // If we're checked, add the task.
             // Just a note: we use task scheduler here as opposed to the "Startup" folder
             // or the registry, because those solutions will cause UAC prompt on startup.
             if (startupCheckbox.Checked)
             {
-                TaskDefinition startupTaskDefinition = TaskService.Instance.NewTask();
-                startupTaskDefinition.RegistrationInfo.Description = "Starts Eve.TapToClick on system startup";
-                startupTaskDefinition.Principal.LogonType = TaskLogonType.InteractiveToken;
-                startupTaskDefinition.Principal.RunLevel = TaskRunLevel.Highest;
-
-                startupTaskDefinition.Triggers.Add(new LogonTrigger());
-                startupTaskDefinition.Actions.Add(new ExecAction(Application.ExecutablePath));
-
-                TaskService.Instance.RootFolder.RegisterTaskDefinition(StartupTaskName, startupTaskDefinition);
+                AutoRun.AddStartupTask();
             }
         }
 

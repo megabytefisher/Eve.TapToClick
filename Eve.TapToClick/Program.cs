@@ -14,6 +14,12 @@ namespace Eve.TapToClick
         [STAThread]
         static void Main()
         {
+            if (Environment.GetCommandLineArgs().Any(s => s.ToLower() == "--remove-startup-task"))
+            {
+                AutoRun.RemoveStartupTask();
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
