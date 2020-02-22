@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notifyIconConfigureMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIconExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readingsDisplay = new System.Windows.Forms.GroupBox();
             this.secondContactActiveCheckbox = new System.Windows.Forms.CheckBox();
             this.firstContactActiveCheckbox = new System.Windows.Forms.CheckBox();
@@ -60,13 +63,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.detectionThresholdTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.notifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.notifyIconExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIconConfigureMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIconContextMenuStrip.SuspendLayout();
             this.readingsDisplay.SuspendLayout();
             this.lastTapDisplay.SuspendLayout();
             this.configGroupBox.SuspendLayout();
-            this.notifyIconContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -76,6 +76,28 @@
             this.notifyIcon.Text = "Eve.TapToClick";
             this.notifyIcon.Visible = true;
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
+            // notifyIconContextMenuStrip
+            // 
+            this.notifyIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notifyIconConfigureMenuItem,
+            this.notifyIconExitMenuItem});
+            this.notifyIconContextMenuStrip.Name = "notifyIconContextMenuStrip";
+            this.notifyIconContextMenuStrip.Size = new System.Drawing.Size(137, 48);
+            // 
+            // notifyIconConfigureMenuItem
+            // 
+            this.notifyIconConfigureMenuItem.Name = "notifyIconConfigureMenuItem";
+            this.notifyIconConfigureMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notifyIconConfigureMenuItem.Text = "Configure...";
+            this.notifyIconConfigureMenuItem.Click += new System.EventHandler(this.notifyIconConfigureMenuItem_Click);
+            // 
+            // notifyIconExitMenuItem
+            // 
+            this.notifyIconExitMenuItem.Name = "notifyIconExitMenuItem";
+            this.notifyIconExitMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notifyIconExitMenuItem.Text = "Exit";
+            this.notifyIconExitMenuItem.Click += new System.EventHandler(this.notifyIconExitMenuItem_Click);
             // 
             // readingsDisplay
             // 
@@ -367,28 +389,6 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Min Pressure Detection Threshold";
             // 
-            // notifyIconContextMenuStrip
-            // 
-            this.notifyIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notifyIconConfigureMenuItem,
-            this.notifyIconExitMenuItem});
-            this.notifyIconContextMenuStrip.Name = "notifyIconContextMenuStrip";
-            this.notifyIconContextMenuStrip.Size = new System.Drawing.Size(137, 48);
-            // 
-            // notifyIconExitMenuItem
-            // 
-            this.notifyIconExitMenuItem.Name = "notifyIconExitMenuItem";
-            this.notifyIconExitMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.notifyIconExitMenuItem.Text = "Exit";
-            this.notifyIconExitMenuItem.Click += new System.EventHandler(this.notifyIconExitMenuItem_Click);
-            // 
-            // notifyIconConfigureMenuItem
-            // 
-            this.notifyIconConfigureMenuItem.Name = "notifyIconConfigureMenuItem";
-            this.notifyIconConfigureMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.notifyIconConfigureMenuItem.Text = "Configure...";
-            this.notifyIconConfigureMenuItem.Click += new System.EventHandler(this.notifyIconConfigureMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -397,19 +397,22 @@
             this.Controls.Add(this.configGroupBox);
             this.Controls.Add(this.lastTapDisplay);
             this.Controls.Add(this.readingsDisplay);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Eve.TapToClick Configuration";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
+            this.notifyIconContextMenuStrip.ResumeLayout(false);
             this.readingsDisplay.ResumeLayout(false);
             this.readingsDisplay.PerformLayout();
             this.lastTapDisplay.ResumeLayout(false);
             this.lastTapDisplay.PerformLayout();
             this.configGroupBox.ResumeLayout(false);
             this.configGroupBox.PerformLayout();
-            this.notifyIconContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
