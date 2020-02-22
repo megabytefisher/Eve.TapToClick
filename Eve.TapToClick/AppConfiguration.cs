@@ -1,11 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO.IsolatedStorage;
 
 namespace Eve.TapToClick
 {
@@ -18,8 +13,7 @@ namespace Eve.TapToClick
 
         private static AppConfiguration instance;
 
-        private static string ConfigPath =
-            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "config.json");
+        private const string ConfigFileName = "config.json";
 
         public AppConfiguration()
         {
@@ -31,7 +25,15 @@ namespace Eve.TapToClick
 
         public void Save()
         {
-            File.WriteAllText(ConfigPath, JsonConvert.SerializeObject(this));
+            using (IsolatedStorageFile isoStore =
+                IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null))
+            {
+                using (IsolatedStorageFileStream configStream = isoStore.OpenFile(ConfigFileName, FileMode.Create, FileAccess.Write))
+                using (StreamWriter configWriter = new StreamWriter(configStream))
+                {
+                    configWriter.Write(JsonConvert.SerializeObject(this));
+                }
+            }
         }
 
         public static AppConfiguration Instance
@@ -47,15 +49,23 @@ namespace Eve.TapToClick
 
         private static AppConfiguration Load()
         {
-            if (!File.Exists(ConfigPath))
+            using (IsolatedStorageFile isoStore =
+                IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null))
             {
-                AppConfiguration newConfig = new AppConfiguration();
-                newConfig.Save();
+                if (!isoStore.FileExists(ConfigFileName))
+                {
+                    AppConfiguration newConfig = new AppConfiguration();
+                    newConfig.Save();
 
-                return newConfig;
+                    return newConfig;
+                }
+
+                using (IsolatedStorageFileStream configStream = new IsolatedStorageFileStream(ConfigFileName, FileMode.Open, FileAccess.Read))
+                using (StreamReader configReader = new StreamReader(configStream))
+                {
+                    return JsonConvert.DeserializeObject<AppConfiguration>(configReader.ReadToEnd());
+                }
             }
-
-            return JsonConvert.DeserializeObject<AppConfiguration>(File.ReadAllText(ConfigPath));
         }
     }
 }
