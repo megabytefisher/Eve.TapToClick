@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eve.TapToClick", "Eve.TapToClick\Eve.TapToClick.csproj", "{34B74ED8-1362-4F02-BA0E-4F09F64EB567}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Eve.TapToClick.Installer", "Eve.TapToClick.Installer\Eve.TapToClick.Installer.vdproj", "{D4E8AD68-E863-445D-8862-C6FAAB386E4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{34B74ED8-1362-4F02-BA0E-4F09F64EB567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34B74ED8-1362-4F02-BA0E-4F09F64EB567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34B74ED8-1362-4F02-BA0E-4F09F64EB567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E8AD68-E863-445D-8862-C6FAAB386E4F}.Debug|Any CPU.ActiveCfg = Debug
+		{D4E8AD68-E863-445D-8862-C6FAAB386E4F}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
