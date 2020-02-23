@@ -1,4 +1,4 @@
-﻿namespace Eve.TapToClick
+﻿namespace Eve.TapToClick.Forms
 {
     partial class MainForm
     {

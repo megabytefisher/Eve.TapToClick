@@ -1,4 +1,7 @@
-﻿using Eve.TapToClick.NativeInterop;
+﻿using Eve.TapToClick.Controls;
+using Eve.TapToClick.Models;
+using Eve.TapToClick.NativeInterop;
+using Eve.TapToClick.Utilities;
 using Microsoft.Win32;
 using Microsoft.Win32.TaskScheduler;
 using System;
@@ -11,7 +14,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Eve.TapToClick
+namespace Eve.TapToClick.Forms
 {
     public partial class MainForm : Form
     {

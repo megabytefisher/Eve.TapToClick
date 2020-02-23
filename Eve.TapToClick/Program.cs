@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Eve.TapToClick.Forms;
+using Eve.TapToClick.Utilities;
+using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Eve.TapToClick

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Eve.TapToClick
+namespace Eve.TapToClick.Controls
 {
     public partial class ActiveContactDisplay : UserControl
     {

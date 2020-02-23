@@ -1,4 +1,4 @@
-﻿namespace Eve.TapToClick
+﻿namespace Eve.TapToClick.Controls
 {
     partial class ActiveContactDisplay
     {
