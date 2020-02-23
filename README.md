@@ -24,7 +24,7 @@ If you have issues or questions, open an issue and I'll try to help you out. If 
 **I do not recommend using this when playing games that use anti-cheat features**. While I can't be completely sure, I suspect some anti-cheat software will flag the injected inputs as macroing software. If you get a ban because of this, I'm not responsible.
 
 ## How to use
-Currently, there is no installer. Just [download the latest release](https://github.com/megabytefisher/Eve.TapToClick/releases), then unzip and run Eve.TapToClick.exe. 
+Just [download the latest release](https://github.com/megabytefisher/Eve.TapToClick/releases), then unzip it and run the installer. After installation, run the program from the start menu. You can set the program to auto-start on system startup from the configuration tab.
 
 ## Configuration
 Value Name | Description/What it does
