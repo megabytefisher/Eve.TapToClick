@@ -1,9 +1,12 @@
 # Eve.TapToClick
 This is a simple program that enables tap-to-click on the touchpad when running Windows 10 on a Google Pixelbook.
 
-<img src="Eve.TapToClick/ExampleScreenshot.png" width="600">
+## Screenshots
 
-Thanks to MrChromebox's efforts, Windows 10 can now be installed and works pretty well on the Pixelbook. One of the few issues is that native tap-to-click does not work. This is a temporary workaround, at least until something more robust works.
+<img src="screenshot1.PNG" width="600">
+<img src="screenshot2.PNG" width="600">
+
+Thanks to MrChromebox's efforts, Windows 10 can now be installed and works pretty well on the Pixelbook. One of the few issues is that native tap-to-click does not work. For now, this program serves as a workaround.
 
 This app uses Windows' [raw input API](https://docs.microsoft.com/en-us/windows/win32/inputdev/raw-input) to access the touchpad's raw data, such as the pressure and X/Y readings. Using this data, it determines when a tap has occurred then injects the click input.
 
