@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>\\172.27.72.6\Users\Kevin\Documents\TapToClick\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveContactDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ActiveContactDisplay.Designer.cs">
+      <DependentUpon>ActiveContactDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="AutoRun.cs" />
     <Compile Include="Constants.cs" />
@@ -87,11 +93,18 @@
     <Compile Include="NativeInterop\RawInputHeader.cs" />
     <Compile Include="NativeInterop\RawInputHid.cs" />
     <Compile Include="NativeInterop\RawInputType.cs" />
+    <Compile Include="NativeInterop\UsageDescriptor.cs" />
     <Compile Include="NativeInterop\User32.cs" />
     <Compile Include="NativeInterop\Utilities.cs" />
     <Compile Include="NativeInterop\WindowMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TapData.cs" />
+    <Compile Include="TouchpadEventArgs.cs" />
+    <Compile Include="TouchpadWatcher.cs" />
+    <EmbeddedResource Include="ActiveContactDisplay.resx">
+      <DependentUpon>ActiveContactDisplay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

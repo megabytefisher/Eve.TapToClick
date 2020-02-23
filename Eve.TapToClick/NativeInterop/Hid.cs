@@ -15,10 +15,10 @@ namespace Eve.TapToClick.NativeInterop
         [DllImport("hid.dll", SetLastError = true)]
         private static extern uint HidP_GetUsages(HidPReportType hidPReportType, ushort usagePage, ushort linkCollection, ushort[] usageList, ref uint usageLength, byte[] preparsedData, byte[] report, uint reportLength);
 
-        public static uint HidP_GetUsageValue(HidPReportType hidPReportType, ushort usagePage, ushort linkCollection, ushort usage, byte[] preparsedData, byte[] report)
+        public static uint HidP_GetUsageValue(HidPReportType hidPReportType, UsageDescriptor usage, ushort linkCollection, byte[] preparsedData, byte[] report)
         {
             uint result = 0;
-            uint success = HidP_GetUsageValue(hidPReportType, usagePage, linkCollection, usage, ref result, preparsedData, report, (uint)report.Length);
+            uint success = HidP_GetUsageValue(hidPReportType, usage.UsagePage, linkCollection, usage.Usage, ref result, preparsedData, report, (uint)report.Length);
 
             return result;
         }

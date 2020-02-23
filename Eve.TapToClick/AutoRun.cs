@@ -26,7 +26,7 @@ namespace Eve.TapToClick
             startupTaskDefinition.Principal.RunLevel = TaskRunLevel.Highest;
 
             startupTaskDefinition.Triggers.Add(new LogonTrigger());
-            startupTaskDefinition.Actions.Add(new ExecAction(Application.ExecutablePath));
+            startupTaskDefinition.Actions.Add(new ExecAction(Application.ExecutablePath, "--minimize"));
 
             TaskService.Instance.RootFolder.RegisterTaskDefinition(StartupTaskName, startupTaskDefinition);
         }

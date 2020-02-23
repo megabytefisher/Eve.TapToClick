@@ -16,198 +16,220 @@ namespace Eve.TapToClick
     public partial class MainForm : Form
     {
         private AppConfiguration config;
+        private TouchpadWatcher touchpadWatcher;
+        private ActiveContactDisplay[] activeContactDisplays;
 
         private bool initialized = false;
 
-        private DateTime? detectionStart;
-        private bool triggerHit;
-        private bool twoFinger;
-        private uint? lastX;
-        private uint? lastY;
-        private uint maxTapPressure;
-        private double deltaDistance;
+        private TapData currentTap;
+        private TapData previousTap;
 
         public MainForm()
         {
             InitializeComponent();
+
+            // Load the config instance and store a ref
             config = AppConfiguration.Instance;
+
+            // Initialize TouchpadWatcher and hook into events
+            touchpadWatcher = new TouchpadWatcher();
+            touchpadWatcher.MinimumDetectionPressure = config.DetectionThreshold;
+            touchpadWatcher.ContactStart += HandleContactStart;
+            touchpadWatcher.ContactUpdate += HandleContactUpdate;
+            touchpadWatcher.ContactEnd += HandleContactEnd;
+
+            // Create an array of the active contact displays
+            // for easy access later
+            activeContactDisplays = new ActiveContactDisplay[]
+            {
+                activeContactDisplay1,
+                activeContactDisplay2,
+                activeContactDisplay3,
+                activeContactDisplay4,
+                activeContactDisplay5
+            };
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // Register to receive WM_INPUT messages for the specified HID device.
+            User32.RegisterRawInputDevices(new RawInputDevice[]
+            {
+                new RawInputDevice
+                {
+                    UsagePage = Constants.TargetDeviceUsage.UsagePage,
+                    Usage = Constants.TargetDeviceUsage.Usage,
+                    Flags = RawInputDeviceFlags.InputSink,
+                    WindowHandle = this.Handle
+                }
+            });
+            
+            // Load the config values into the text boxes
+            LoadConfigValues();
+
+            // Disable the apply button until a change is detected
+            applyConfigButton.Enabled = false;
+
+            // Check if we're already set to auto-run on system startup
+            if (AutoRun.StartupTaskExists())
+                startupCheckbox.Checked = true;
+
+            initialized = true;
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            // Should we start minimized?
+            // We do this in the "Shown" event handle, because
+            // the "Resize" event isn't fired when we do this
+            // inside the "Load" event handler.
+            if (Environment.GetCommandLineArgs().Any(s => s.ToLower() == "--minimize"))
+                WindowState = FormWindowState.Minimized;
         }
 
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
 
+            // We look for raw input messages here and pass them 
+            // to the TouchpadWatcher, where they are processed into
+            // the events below.
             switch ((WindowMessage)m.Msg)
             {
                 case WindowMessage.WM_INPUT:
-                    // Read raw input data
-                    RawInput rawInput = User32.GetRawInputData(m.LParam, RawInputCommand.Input);
-
-                    // Get preparsed data, which is used by hid.dll functions
-                    byte[] preparsedData = User32.GetRawInputDeviceInfo(rawInput.Header.Device, DeviceInfoType.RIDI_PREPARSEDDATA);
-
-                    // Check for active usages in the digitizer usage page on
-                    // link collections 1 and 2. This is an easy way to determine
-                    // whether the contacts are active - if there are active usages,
-                    // it is active.
-                    ushort[] firstContactUsages =
-                        Hid.HidP_GetUsages(HidPReportType.HidP_Input, Constants.PressureUsagePage, 1, preparsedData, rawInput.HidReports[0]);
-                    ushort[] secondContactUsages =
-                        Hid.HidP_GetUsages(HidPReportType.HidP_Input, Constants.PressureUsagePage, 2, preparsedData, rawInput.HidReports[0]);
-
-                    bool firstContactActive = firstContactUsages.Any();
-                    bool secondContactActive = secondContactUsages.Any();
-
-                    uint maxPressure = 0;
-                    uint? firstContactX = null;
-                    uint? firstContactY = null;
-
-                    // If the first contact is active, read the pressure and X/Y position.
-                    // Make sure pressure is above the detection threshold.
-                    if (firstContactActive)
-                    {
-                        uint firstContactPressure =
-                            Hid.HidP_GetUsageValue(HidPReportType.HidP_Input, Constants.PressureUsagePage, 1, Constants.PressureUsage, preparsedData, rawInput.HidReports[0]);
-
-                        if (firstContactPressure >= config.DetectionThreshold)
-                        {
-                            maxPressure = firstContactPressure;
-
-                            firstContactX =
-                                Hid.HidP_GetUsageValue(HidPReportType.HidP_Input, Constants.PositionXUsagePage, 1, Constants.PositionXUsage, preparsedData, rawInput.HidReports[0]);
-                            firstContactY =
-                                Hid.HidP_GetUsageValue(HidPReportType.HidP_Input, Constants.PositionYUsagePage, 1, Constants.PositionYUsage, preparsedData, rawInput.HidReports[0]);
-                        }
-                        else
-                        {
-                            firstContactActive = false;
-                        }
-                    }
-
-                    // If the second contact is active, read the pressure.
-                    if (secondContactActive)
-                    {
-                        uint secondContactPressure =
-                            Hid.HidP_GetUsageValue(HidPReportType.HidP_Input, Constants.PressureUsagePage, 2, Constants.PressureUsage, preparsedData, rawInput.HidReports[0]);
-
-                        if (secondContactPressure >= config.DetectionThreshold)
-                        {
-                            maxPressure = Math.Max(maxPressure, secondContactPressure);
-                        }
-                        else
-                        {
-                            secondContactActive = false;
-                        }
-                    }
-
-                    // If there's no active tap start time, and we've detected a contact,
-                    // begin the "tap" by setting the start time to now.
-                    if (!detectionStart.HasValue && firstContactActive)
-                    {
-                        detectionStart = DateTime.Now;
-                    }
-
-                    // If we're inside a tap...
-                    if (detectionStart.HasValue)
-                    {
-                        // Update max recorded tap pressure, if needed.
-                        maxTapPressure = Math.Max(maxPressure, maxTapPressure);
-
-                        // If both contacts are active, set the twoFinger flag.
-                        if (firstContactActive && secondContactActive)
-                        {
-                            twoFinger = true;
-                        }
-
-                        // If the pressure exceeds the trigger threshold, set that flag.
-                        if (maxPressure >= config.TapTriggerThreshold)
-                        {
-                            triggerHit = true;
-                        }
-
-                        // Add the travel distance on the first contact.
-                        if (lastX.HasValue && lastY.HasValue && firstContactX.HasValue && firstContactY.HasValue)
-                        {
-                            deltaDistance += Math.Sqrt(Math.Pow((double)lastX.Value - firstContactX.Value, 2) + Math.Pow((double)lastY.Value - firstContactY.Value, 2));
-                        }
-
-                        // If the first contact was active, set the last X/Y to the new values.
-                        if (firstContactX.HasValue && firstContactY.HasValue)
-                        {
-                            lastX = firstContactX;
-                            lastY = firstContactY;
-                        }
-                        else
-                        {
-                            lastX = null;
-                            lastY = null;
-                        }
-
-                        // If we've fallen below the detection threshold...
-                        if (maxPressure <= config.DetectionThreshold)
-                        {
-                            // Calculate the total milliseconds for the tap.
-                            double tapDurationMilliseconds = (DateTime.Now - detectionStart.Value).TotalMilliseconds;
-
-                            // If we hit the trigger threshold, are below the maximum time, and didn't exceed the
-                            // maximum delta position, then we've just seen a tap.
-                            if (triggerHit && tapDurationMilliseconds <= config.MaxTapMilliseconds &&
-                                deltaDistance <= config.MaxTapDeltaPosition)
-                            {
-                                if (twoFinger)
-                                {
-                                    SendRightClick();
-                                }
-                                else
-                                {
-                                    SendLeftClick();
-                                }
-                            }
-
-                            // Update form labels, if it is visible.
-                            if (this.Visible)
-                            {
-                                maxPressureValueLabel.Text = maxTapPressure.ToString();
-                                deltaDistanceLabel.Text = Math.Truncate(deltaDistance).ToString();
-                                contactDurationLabel.Text = $"{Math.Truncate(tapDurationMilliseconds)} ms";
-                                triggerHitCheckbox.Checked = triggerHit;
-                                twoFingerCheckbox.Checked = twoFinger;
-                                
-                                maxPressureValueLabel.ForeColor = maxTapPressure >= config.TapTriggerThreshold ?
-                                    Color.DarkGreen :
-                                    Color.DarkRed;
-
-                                deltaDistanceLabel.ForeColor = deltaDistance <= config.MaxTapDeltaPosition ?
-                                    Color.DarkGreen :
-                                    Color.DarkRed;
-
-                                contactDurationLabel.ForeColor = tapDurationMilliseconds <= config.MaxTapMilliseconds ?
-                                    Color.DarkGreen :
-                                    Color.DarkRed;
-                            }
-
-                            // Since this tap is done, reset all values for the next one.
-                            detectionStart = null;
-                            triggerHit = false;
-                            twoFinger = false;
-                            lastX = null;
-                            lastY = null;
-                            maxTapPressure = 0;
-                            deltaDistance = 0;
-                        }
-                    }
-
-                    // If the form is visible, update labels.
-                    if (this.Visible)
-                    {
-                        pressureValueLabel.Text = maxPressure.ToString();
-                        firstXValueLabel.Text = firstContactX.ToString();
-                        firstYValueLabel.Text = firstContactY.ToString();
-                        firstContactActiveCheckbox.Checked = firstContactActive;
-                        secondContactActiveCheckbox.Checked = secondContactActive;
-                    }
+                    touchpadWatcher.HandleInputMessage(ref m);
 
                     break;
+            }
+        }
+
+        // Originally, I thought I would need to handle these two types of events
+        // independently, but that didn't turn out to be the case.
+        private void HandleContactStart(object sender, TouchpadEventArgs e)
+        {
+            ProcessActiveContact(e);
+        }
+
+        private void HandleContactUpdate(object sender, TouchpadEventArgs e)
+        {
+            ProcessActiveContact(e);
+        }
+
+        private void ProcessActiveContact(TouchpadEventArgs eventArgs)
+        {
+            // If we're not inside an active 'tap', instantiate one.
+            if (currentTap == null)
+                currentTap = new TapData(Constants.MaxContacts);
+
+            bool wasActive = currentTap.InstantaneousActiveContacts[eventArgs.ContactIndex];
+            currentTap.InstantaneousActiveContacts[eventArgs.ContactIndex] = true;
+
+            // If we were previously active, add the distance from the last X/Y
+            // to this new one to the total distance in the tap object.
+            if (wasActive)
+            {
+                uint previousX = currentTap.PreviousXValues[eventArgs.ContactIndex];
+                uint previousY = currentTap.PreviousYValues[eventArgs.ContactIndex];
+
+                double positionDelta = Math.Sqrt(Math.Pow((double)eventArgs.X - previousX, 2) + Math.Pow((double)eventArgs.Y - previousY, 2));
+                currentTap.TotalContactDistances[eventArgs.ContactIndex] += positionDelta;
+            }
+
+            currentTap.MaximumActiveContacts = Math.Max(currentTap.InstantaneousActiveContacts.Count(ac => ac), currentTap.MaximumActiveContacts);
+            currentTap.MaximumPressure = Math.Max(currentTap.MaximumPressure, eventArgs.Pressure);
+
+            currentTap.PreviousXValues[eventArgs.ContactIndex] = eventArgs.X;
+            currentTap.PreviousYValues[eventArgs.ContactIndex] = eventArgs.Y;
+
+            if (eventArgs.Pressure >= config.TapTriggerThreshold)
+            {
+                currentTap.TapThresholdMet = true;
+            }
+
+            // If we're not minimized, update the form values
+            if (WindowState != FormWindowState.Minimized)
+            {
+                ActiveContactDisplay contactDisplay = activeContactDisplays[eventArgs.ContactIndex];
+
+                contactDisplay.Active = true;
+                contactDisplay.Pressure = eventArgs.Pressure;
+                contactDisplay.X = eventArgs.X;
+                contactDisplay.Y = eventArgs.Y;
+            }
+        }
+
+        private void HandleContactEnd(object sender, TouchpadEventArgs e)
+        {
+            // If the tap object is null, just bail out
+            if (currentTap == null)
+                return;
+
+            currentTap.InstantaneousActiveContacts[e.ContactIndex] = false;
+            int currentActiveContacts = currentTap.InstantaneousActiveContacts.Count(ac => ac);
+
+            // Has the tap ended?
+            if (currentActiveContacts == 0)
+            {
+                DateTime tapEnd = DateTime.Now;
+
+                // Okay, was this *really* a tap?
+                // We need to validate by checking the total duration, whether the pressure threshold was met,
+                // and if the distance was within the maximum range.
+                if ((tapEnd - currentTap.Start).TotalMilliseconds <= config.MaxTapMilliseconds &&
+                    currentTap.TapThresholdMet &&
+                    currentTap.TotalContactDistances.Max() <= config.MaxTapDeltaPosition)
+                {
+                    // If it was a single-finger tap, inject a left click.
+                    if (currentTap.MaximumActiveContacts == 1)
+                    {
+                        SendLeftClick();
+                    }
+                    // If it was a double-finger tap, inject a right click.
+                    else if (currentTap.MaximumActiveContacts == 2)
+                    {
+                        SendRightClick();
+                    }
+                }
+
+                // Store reference to previous tap. Will probably need this later
+                // if we want to add in support for double-tap-and-drag.
+                previousTap = currentTap;
+                
+                // Clear out current tap, for it is over and done
+                currentTap = null;
+
+                // If we're not minimized, update form values
+                if (WindowState != FormWindowState.Minimized)
+                {
+                    // Update previous tap display
+                    previousMaxPressureLabel.Text = previousTap.MaximumPressure.ToString();
+                    previousDurationLabel.Text = ((int)(tapEnd - previousTap.Start).TotalMilliseconds).ToString();
+                    previousMaxDistanceLabel.Text = ((int)previousTap.TotalContactDistances.Max()).ToString();
+                    previousContactCountLabel.Text = previousTap.MaximumActiveContacts.ToString();
+
+                    previousMaxPressureLabel.ForeColor = previousTap.MaximumPressure >= config.TapTriggerThreshold
+                        ? Color.DarkGreen
+                        : Color.DarkRed;
+                    previousDurationLabel.ForeColor = (tapEnd - previousTap.Start).TotalMilliseconds < config.MaxTapMilliseconds
+                        ? Color.DarkGreen
+                        : Color.DarkRed;
+                    previousMaxDistanceLabel.ForeColor = previousTap.TotalContactDistances.Max() < config.MaxTapDeltaPosition
+                        ? Color.DarkGreen
+                        : Color.DarkRed;
+                    previousContactCountLabel.ForeColor = previousTap.MaximumActiveContacts == 1 || previousTap.MaximumActiveContacts == 2
+                        ? Color.Green
+                        : Color.DarkRed;
+                }
+            }
+
+            if (WindowState != FormWindowState.Minimized)
+            {
+                ActiveContactDisplay contactDisplay = activeContactDisplays[e.ContactIndex];
+
+                contactDisplay.Active = false;
+                contactDisplay.Pressure = 0;
+                contactDisplay.X = 0;
+                contactDisplay.Y = 0;
             }
         }
 
@@ -263,30 +285,6 @@ namespace Eve.TapToClick
             });
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            // Register to receive WM_INPUT messages for the specified HID device.
-            User32.RegisterRawInputDevices(new RawInputDevice[]
-            {
-                new RawInputDevice
-                {
-                    UsagePage = Constants.TargetDeviceUsagePage,
-                    Usage = Constants.TargetDeviceUsage,
-                    Flags = RawInputDeviceFlags.InputSink,
-                    WindowHandle = this.Handle
-                }
-            });
-
-            LoadConfigValues();
-            applyConfigButton.Enabled = false;
-
-            // Check if we're already set to auto-run on system startup
-            if (AutoRun.StartupTaskExists())
-                startupCheckbox.Checked = true;
-
-            initialized = true;
-        }
-
         private void SaveConfigValues()
         {
             bool detectionThresholdParsed = uint.TryParse(detectionThresholdTextBox.Text, out uint detectionThreshold);
@@ -320,6 +318,7 @@ namespace Eve.TapToClick
         private void applyConfigButton_Click(object sender, EventArgs e)
         {
             SaveConfigValues();
+            touchpadWatcher.MinimumDetectionPressure = config.DetectionThreshold;
             applyConfigButton.Enabled = false;
         }
 
@@ -370,16 +369,6 @@ namespace Eve.TapToClick
             {
                 AutoRun.AddStartupTask();
             }
-        }
-
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-            // Should we start minimized?
-            // We do this in the "Shown" event handle, because
-            // the "Resize" event isn't fired when we do this
-            // inside the "Load" event handler.
-            if (Environment.GetCommandLineArgs().Any(s => s.ToLower() == "--minimize"))
-                WindowState = FormWindowState.Minimized;
         }
     }
 }

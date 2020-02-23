@@ -10,6 +10,7 @@ namespace Eve.TapToClick
         public uint TapTriggerThreshold { get; set; }
         public int MaxTapMilliseconds { get; set; }
         public int MaxTapDeltaPosition { get; set; }
+        public int MaxDoubleTapAndDragMilliseconds { get; set; }
 
         private static AppConfiguration instance;
 
@@ -21,6 +22,7 @@ namespace Eve.TapToClick
             TapTriggerThreshold = 10;
             MaxTapMilliseconds = 175;
             MaxTapDeltaPosition = 500;
+            MaxDoubleTapAndDragMilliseconds = 250;
         }
 
         public void Save()
