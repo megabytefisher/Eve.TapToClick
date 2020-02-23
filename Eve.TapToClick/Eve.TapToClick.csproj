@@ -60,19 +60,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveContactDisplay.cs">
+    <Compile Include="Controls\ActiveContactDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ActiveContactDisplay.Designer.cs">
+    <Compile Include="Controls\ActiveContactDisplay.Designer.cs">
       <DependentUpon>ActiveContactDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="AppConfiguration.cs" />
-    <Compile Include="AutoRun.cs" />
+    <Compile Include="Utilities\AutoRun.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NativeInterop\DeviceInfoType.cs" />
@@ -99,13 +99,13 @@
     <Compile Include="NativeInterop\WindowMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TapData.cs" />
-    <Compile Include="TouchpadEventArgs.cs" />
-    <Compile Include="TouchpadWatcher.cs" />
-    <EmbeddedResource Include="ActiveContactDisplay.resx">
+    <Compile Include="Models\TapData.cs" />
+    <Compile Include="Utilities\TouchpadEventArgs.cs" />
+    <Compile Include="Utilities\TouchpadWatcher.cs" />
+    <EmbeddedResource Include="Controls\ActiveContactDisplay.resx">
       <DependentUpon>ActiveContactDisplay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -135,5 +135,6 @@
   <ItemGroup>
     <Content Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

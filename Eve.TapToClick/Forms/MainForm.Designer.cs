@@ -1,4 +1,6 @@
-﻿namespace Eve.TapToClick.Forms
+﻿using Eve.TapToClick.Controls;
+
+namespace Eve.TapToClick.Forms
 {
     partial class MainForm
     {
@@ -52,11 +54,11 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.previousTapGroupBox = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.activeContactDisplay4 = new Eve.TapToClick.ActiveContactDisplay();
-            this.activeContactDisplay3 = new Eve.TapToClick.ActiveContactDisplay();
-            this.activeContactDisplay2 = new Eve.TapToClick.ActiveContactDisplay();
-            this.activeContactDisplay1 = new Eve.TapToClick.ActiveContactDisplay();
-            this.activeContactDisplay5 = new Eve.TapToClick.ActiveContactDisplay();
+            this.activeContactDisplay4 = new ActiveContactDisplay();
+            this.activeContactDisplay3 = new ActiveContactDisplay();
+            this.activeContactDisplay2 = new ActiveContactDisplay();
+            this.activeContactDisplay1 = new ActiveContactDisplay();
+            this.activeContactDisplay5 = new ActiveContactDisplay();
             this.previousMaxPressureLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.previousDurationLabel = new System.Windows.Forms.Label();
@@ -472,7 +474,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private TapToClick.ActiveContactDisplay activeContactDisplay5;
+        private ActiveContactDisplay activeContactDisplay5;
         private ActiveContactDisplay activeContactDisplay4;
         private ActiveContactDisplay activeContactDisplay3;
         private ActiveContactDisplay activeContactDisplay2;
