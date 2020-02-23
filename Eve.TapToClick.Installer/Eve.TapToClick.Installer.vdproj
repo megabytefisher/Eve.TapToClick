@@ -16,7 +16,7 @@
         "Entry"
         {
         "MsmKey" = "8:_397BC7075198BC794C09D535670E4B6B"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -28,13 +28,13 @@
         "Entry"
         {
         "MsmKey" = "8:_55DB576647401A07285D295F6A3AF5DB"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_98C4C340A6FDD5295A509D31778A503C"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,13 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_9B90A6B3B7642D1072D11D91FFF97E0B"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_B3C7051E8D90C78E02917A76E234E02E"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -69,14 +69,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "MsmKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "OwnerKey" = "8:_397BC7075198BC794C09D535670E4B6B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -107,12 +113,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B93BCECC796975B845DA7C42F4C3EA2F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_397BC7075198BC794C09D535670E4B6B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -187,47 +187,47 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2435690AAB7B450995CFA5EB32B91B03"
-            {
-            "Name" = "8:Remove Startup Task"
-            "Condition" = "8:"
-            "Object" = "8:_DAF750315A1340439A65626421D73A9E"
-            "FileType" = "3:2"
-            "InstallAction" = "3:4"
-            "Arguments" = "8:--remove-startup-task"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_9BD2C7D2_7355_47D6_B0C9_A7CEC2D87AFA"
-            "InstallerClass" = "11:FALSE"
-            "CustomActionData" = "8:"
-            "Run64Bit" = "11:TRUE"
-            }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_36436512E9CC479389D29AD0F6853106"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2F60518C98AC4A8BAA07D2A4E8575EAF"
             {
             "Name" = "8:Kill Instance"
             "Condition" = "8:"
-            "Object" = "8:_DAF750315A1340439A65626421D73A9E"
+            "Object" = "8:_FCE019A25E1040C595738DA96CDBD005"
             "FileType" = "3:2"
             "InstallAction" = "3:1"
             "Arguments" = "8:--kill-instance"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_CA48DC59_2B66_4A8C_945F_9BB34BA1E5EC"
+            "Identifier" = "8:_8754655F_E8DA_41F6_97E6_12BE0DFFA525"
             "InstallerClass" = "11:FALSE"
             "CustomActionData" = "8:"
             "Run64Bit" = "11:TRUE"
             }
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_3BC1026E13C54F89BAD4B467D4DB1438"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_BEFD23809E6148C698C18CFAE9B1C8B1"
+            {
+            "Name" = "8:Remove Startup Task"
+            "Condition" = "8:"
+            "Object" = "8:_FCE019A25E1040C595738DA96CDBD005"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:--remove-startup-task"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:2"
+            "Identifier" = "8:_8B5AABDE_739B_4F0D_8383_F8DC95238984"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            "Run64Bit" = "11:TRUE"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_F4BC0FEB39D043E88A7CDDCD2CDEAAA7"
             {
             "Name" = "8:Kill Instance"
             "Condition" = "8:"
-            "Object" = "8:_DAF750315A1340439A65626421D73A9E"
+            "Object" = "8:_FCE019A25E1040C595738DA96CDBD005"
             "FileType" = "3:2"
             "InstallAction" = "3:4"
             "Arguments" = "8:--kill-instance"
             "EntryPoint" = "8:"
-            "Sequence" = "3:2"
-            "Identifier" = "8:_39EB0539_14F5_4A11_AA7E_376716DE044C"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_C38E3B9D_1C86_43BB_BC17_FF951C118D65"
             "InstallerClass" = "11:FALSE"
             "CustomActionData" = "8:"
             "Run64Bit" = "11:TRUE"
@@ -507,7 +507,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Eve.TapToClick"
         "ProductCode" = "8:{082EDE5D-BEF2-4C5E-9F5F-D1E6CE80B37A}"
-        "PackageCode" = "8:{E1CCC0C9-6621-46FB-AD5B-A7E06D93DDF4}"
+        "PackageCode" = "8:{C2E1E088-44A2-4133-99FA-61E98D524D37}"
         "UpgradeCode" = "8:{4760B4FB-DA26-4C87-8FE4-DEED9278508D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -635,7 +635,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_DAF750315A1340439A65626421D73A9E"
+            "Target" = "8:_FCE019A25E1040C595738DA96CDBD005"
             "Folder" = "8:_9F33C93D63B24F4F9EC2689C151D1D5C"
             "WorkingFolder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
             "Icon" = "8:_41C5F463FBF34011B4EEB4CC06CBF0B4"
@@ -1040,9 +1040,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DAF750315A1340439A65626421D73A9E"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FCE019A25E1040C595738DA96CDBD005"
             {
-            "SourcePath" = "8:..\\Eve.TapToClick\\obj\\Debug\\Eve.TapToClick.exe"
+            "SourcePath" = "8:..\\Eve.TapToClick\\obj\\Release\\Eve.TapToClick.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
@@ -1060,7 +1060,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Release|Any CPU"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{34B74ED8-1362-4F02-BA0E-4F09F64EB567}"
             "ShowKeyOutput" = "11:TRUE"
