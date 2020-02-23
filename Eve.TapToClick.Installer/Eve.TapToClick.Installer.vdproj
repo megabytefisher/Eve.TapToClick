@@ -21,14 +21,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_55DB576647401A07285D295F6A3AF5DB"
-        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
+        "MsmKey" = "8:_41C5F463FBF34011B4EEB4CC06CBF0B4"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5BBEE14F651943A89808FDC605956FFE"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_55DB576647401A07285D295F6A3AF5DB"
+        "OwnerKey" = "8:_DAF750315A1340439A65626421D73A9E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -256,6 +256,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_41C5F463FBF34011B4EEB4CC06CBF0B4"
+            {
+            "SourcePath" = "8:..\\Eve.TapToClick\\icon.ico"
+            "TargetName" = "8:icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55DB576647401A07285D295F6A3AF5DB"
             {
             "AssemblyRegister" = "3:1"
@@ -285,26 +305,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BBEE14F651943A89808FDC605956FFE"
-            {
-            "SourcePath" = "8:..\\Eve.TapToClick\\icon.ico"
-            "TargetName" = "8:icon.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_98C4C340A6FDD5295A509D31778A503C"
@@ -476,15 +476,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Eve.TapToClick"
-        "ProductCode" = "8:{05125D6E-DAB2-405B-BD09-1AF4F5B3D956}"
-        "PackageCode" = "8:{55814077-034A-443C-BAA5-A5D0D02FBCA5}"
+        "ProductCode" = "8:{9AA0D616-3FE6-44B9-8015-12FA19BCCF8B}"
+        "PackageCode" = "8:{38294151-C757-4776-B547-9F5C8BD54542}"
         "UpgradeCode" = "8:{4760B4FB-DA26-4C87-8FE4-DEED9278508D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:megabytefisher"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/megabytefisher/Eve.TapToClick"
@@ -494,7 +494,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:https://github.com/megabytefisher/Eve.TapToClick"
-        "ARPPRODUCTICON" = "8:_5BBEE14F651943A89808FDC605956FFE"
+        "ARPPRODUCTICON" = "8:_41C5F463FBF34011B4EEB4CC06CBF0B4"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -608,7 +608,7 @@
             "Target" = "8:_DAF750315A1340439A65626421D73A9E"
             "Folder" = "8:_9F33C93D63B24F4F9EC2689C151D1D5C"
             "WorkingFolder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
-            "Icon" = "8:_5BBEE14F651943A89808FDC605956FFE"
+            "Icon" = "8:_41C5F463FBF34011B4EEB4CC06CBF0B4"
             "Feature" = "8:"
             }
         }
@@ -952,7 +952,7 @@
                             "ContextData" = "8:1;True=1;False=0"
                             "Attributes" = "3:0"
                             "Setting" = "3:0"
-                            "Value" = "3:1"
+                            "Value" = "3:0"
                             "DefaultValue" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
