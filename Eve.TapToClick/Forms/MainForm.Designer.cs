@@ -60,12 +60,12 @@ namespace Eve.TapToClick.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.previousMaxPressureLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.activeContactDisplay4 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.activeContactDisplay3 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.activeContactDisplay2 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.activeContactDisplay1 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.activeContactDisplay5 = new Eve.TapToClick.Controls.ActiveContactDisplay();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.notifyIconContextMenuStrip.SuspendLayout();
             this.configGroupBox.SuspendLayout();
             this.settingsGroupBox.SuspendLayout();
@@ -350,18 +350,6 @@ namespace Eve.TapToClick.Forms
             this.label1.TabIndex = 0;
             this.label1.Text = "Maximum Pressure";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.configGroupBox);
-            this.tabPage2.Controls.Add(this.settingsGroupBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(485, 240);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Configuration";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // activeContactDisplay4
             // 
             this.activeContactDisplay4.Active = false;
@@ -421,6 +409,18 @@ namespace Eve.TapToClick.Forms
             this.activeContactDisplay5.TabIndex = 5;
             this.activeContactDisplay5.X = ((uint)(0u));
             this.activeContactDisplay5.Y = ((uint)(0u));
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.configGroupBox);
+            this.tabPage2.Controls.Add(this.settingsGroupBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(485, 240);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Configuration";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

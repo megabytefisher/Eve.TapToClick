@@ -21,6 +21,7 @@ namespace Eve.TapToClick.Forms
         private AppConfiguration config;
         private TouchpadWatcher touchpadWatcher;
         private ActiveContactDisplay[] activeContactDisplays;
+        private DateTime?[] lastActiveContactUiUpdates;
 
         private bool initialized = false;
 
@@ -40,6 +41,12 @@ namespace Eve.TapToClick.Forms
             touchpadWatcher.ContactStart += HandleContactStart;
             touchpadWatcher.ContactUpdate += HandleContactUpdate;
             touchpadWatcher.ContactEnd += HandleContactEnd;
+
+            // We keep track of when we last updated each
+            // contact display, so we can throttle UI updates
+            // while the mouse is moving. This keeps the program
+            // from using too much CPU
+            lastActiveContactUiUpdates = new DateTime?[Constants.MaxContacts];
 
             // Create an array of the active contact displays
             // for easy access later
@@ -150,7 +157,8 @@ namespace Eve.TapToClick.Forms
             }
 
             // If we're not minimized, update the form values
-            if (WindowState != FormWindowState.Minimized)
+            if (WindowState != FormWindowState.Minimized &&
+                (!lastActiveContactUiUpdates[eventArgs.ContactIndex].HasValue || (DateTime.Now - lastActiveContactUiUpdates[eventArgs.ContactIndex].Value).TotalMilliseconds >= 50))
             {
                 ActiveContactDisplay contactDisplay = activeContactDisplays[eventArgs.ContactIndex];
 
@@ -158,6 +166,8 @@ namespace Eve.TapToClick.Forms
                 contactDisplay.Pressure = eventArgs.Pressure;
                 contactDisplay.X = eventArgs.X;
                 contactDisplay.Y = eventArgs.Y;
+
+                lastActiveContactUiUpdates[eventArgs.ContactIndex] = DateTime.Now;
             }
         }
 
