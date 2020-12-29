@@ -12,7 +12,7 @@ This app uses Windows' [raw input API](https://docs.microsoft.com/en-us/windows/
 
 It allows some configuration, such as the pressure thresholds as well as the maximum time/distance for an input to be considered a tap.
 
-Currently, only single-finger tap (for left click) and double-finger tap (for right click) are implemented. Other gestures, such as double-tap-and-drag do not work.
+Currently, only single-finger tap (for left click), double-finger tap (for right click), and triple-finger tap (for middle click) are implemented. Other gestures, such as double-tap-and-drag do not work.
 
 If you have issues or questions, open an issue and I'll try to help you out. If you want to improve it, feel free to open a pull request.
 
