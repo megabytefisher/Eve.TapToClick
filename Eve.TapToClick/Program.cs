@@ -20,13 +20,22 @@ namespace Eve.TapToClick
             bool removeStartupTask = false;
             bool killInstance = false;
             bool restartInstance = false;
+            bool startMinimized = false;
 
             foreach (string arg in args)
             {
-                if (arg.ToLower() == "--remove-startup-task")
-                    removeStartupTask = true;
-                else if (arg.ToLower() == "--kill-instance")
-                    killInstance = true;
+                switch (arg.ToLower())
+                {
+                    case "--remove-startup-task":
+                        removeStartupTask = true;
+                        break;
+                    case "--kill-instance":
+                        killInstance = true;
+                        break;
+                    case "--minimize":
+                        startMinimized = true;
+                        break;
+                }
             }
 
             if (removeStartupTask)
@@ -55,7 +64,10 @@ namespace Eve.TapToClick
             {
                 if (!mutex.WaitOne(0, false))
                 {
-                    MessageBox.Show("Eve.TapToClick is already running.");
+                    if (!startMinimized)
+                    {
+                        MessageBox.Show("Eve.TapToClick is already running.");
+                    }
                     return;
                 }
 
