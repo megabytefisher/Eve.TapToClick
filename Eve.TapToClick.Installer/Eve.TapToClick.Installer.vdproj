@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_55DB576647401A07285D295F6A3AF5DB"
-        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_98C4C340A6FDD5295A509D31778A503C"
         "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,18 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_98C4C340A6FDD5295A509D31778A503C"
-        "OwnerKey" = "8:_B3C7051E8D90C78E02917A76E234E02E"
+        "OwnerKey" = "8:_E05DD55191E52FDE997E0FD7527E7346"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_9B90A6B3B7642D1072D11D91FFF97E0B"
-        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B3C7051E8D90C78E02917A76E234E02E"
         "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -64,7 +52,19 @@
         "Entry"
         {
         "MsmKey" = "8:_B93BCECC796975B845DA7C42F4C3EA2F"
-        "OwnerKey" = "8:_B3C7051E8D90C78E02917A76E234E02E"
+        "OwnerKey" = "8:_E05DD55191E52FDE997E0FD7527E7346"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E05DD55191E52FDE997E0FD7527E7346"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F26CE9798C79EBE1BE0FFE1FD0412CE6"
+        "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,25 +76,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_397BC7075198BC794C09D535670E4B6B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FCE019A25E1040C595738DA96CDBD005"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B3C7051E8D90C78E02917A76E234E02E"
+        "OwnerKey" = "8:_E05DD55191E52FDE997E0FD7527E7346"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_55DB576647401A07285D295F6A3AF5DB"
+        "OwnerKey" = "8:_F26CE9798C79EBE1BE0FFE1FD0412CE6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -113,6 +107,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B93BCECC796975B845DA7C42F4C3EA2F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_397BC7075198BC794C09D535670E4B6B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -306,37 +306,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55DB576647401A07285D295F6A3AF5DB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_55DB576647401A07285D295F6A3AF5DB"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_98C4C340A6FDD5295A509D31778A503C"
             {
             "AssemblyRegister" = "3:1"
@@ -399,14 +368,45 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B3C7051E8D90C78E02917A76E234E02E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B93BCECC796975B845DA7C42F4C3EA2F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B93BCECC796975B845DA7C42F4C3EA2F"
+                    {
+                    "Name" = "8:System.IO.Compression.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.IO.Compression.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E05DD55191E52FDE997E0FD7527E7346"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Microsoft.Win32.TaskScheduler, Version=2.8.18.0, Culture=neutral, PublicKeyToken=c416bc1b32d97233, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B3C7051E8D90C78E02917A76E234E02E"
+                    "_E05DD55191E52FDE997E0FD7527E7346"
                     {
                     "Name" = "8:Microsoft.Win32.TaskScheduler.dll"
                     "Attributes" = "3:512"
@@ -430,20 +430,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B93BCECC796975B845DA7C42F4C3EA2F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F26CE9798C79EBE1BE0FFE1FD0412CE6"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:TRUE"
-            "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B93BCECC796975B845DA7C42F4C3EA2F"
+                    "_F26CE9798C79EBE1BE0FFE1FD0412CE6"
                     {
-                    "Name" = "8:System.IO.Compression.dll"
+                    "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.IO.Compression.dll"
+            "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5E0DD3DCDA87411DAA2EBB4396A1EC3A"
@@ -506,15 +506,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Eve.TapToClick"
-        "ProductCode" = "8:{082EDE5D-BEF2-4C5E-9F5F-D1E6CE80B37A}"
-        "PackageCode" = "8:{C2E1E088-44A2-4133-99FA-61E98D524D37}"
+        "ProductCode" = "8:{3FD1A7C9-29DB-4334-91AE-8E8CD0E77A62}"
+        "PackageCode" = "8:{3CDBA53C-8E70-4FAA-9F91-7CB1D0939A68}"
         "UpgradeCode" = "8:{4760B4FB-DA26-4C87-8FE4-DEED9278508D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.5"
+        "ProductVersion" = "8:1.0.6"
         "Manufacturer" = "8:megabytefisher"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/megabytefisher/Eve.TapToClick"
