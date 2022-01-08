@@ -19,6 +19,7 @@ namespace Eve.TapToClick.Utilities
             startupTaskDefinition.RegistrationInfo.Description = "Starts Eve.TapToClick on system startup";
             startupTaskDefinition.Principal.LogonType = TaskLogonType.InteractiveToken;
             startupTaskDefinition.Principal.RunLevel = TaskRunLevel.Highest;
+            startupTaskDefinition.Settings.DisallowStartIfOnBatteries = false;
 
             startupTaskDefinition.Triggers.Add(new LogonTrigger());
             startupTaskDefinition.Actions.Add(new ExecAction(Application.ExecutablePath, "--minimize"));
