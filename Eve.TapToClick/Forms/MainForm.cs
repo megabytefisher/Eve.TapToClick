@@ -73,7 +73,7 @@ namespace Eve.TapToClick.Forms
                     WindowHandle = this.Handle
                 }
             });
-            
+
             // Load the config values into the text boxes
             LoadConfigValues();
 
@@ -202,12 +202,16 @@ namespace Eve.TapToClick.Forms
                     {
                         SendRightClick();
                     }
+                    else if (currentTap.MaximumActiveContacts == 3)
+                    {
+                        SendMiddleClick();
+                    }
                 }
 
                 // Store reference to previous tap. Will probably need this later
                 // if we want to add in support for double-tap-and-drag.
                 previousTap = currentTap;
-                
+
                 // Clear out current tap, for it is over and done
                 currentTap = null;
 
@@ -229,7 +233,7 @@ namespace Eve.TapToClick.Forms
                     previousMaxDistanceLabel.ForeColor = previousTap.TotalContactDistances.Max() < config.MaxTapDeltaPosition
                         ? Color.DarkGreen
                         : Color.DarkRed;
-                    previousContactCountLabel.ForeColor = previousTap.MaximumActiveContacts == 1 || previousTap.MaximumActiveContacts == 2
+                    previousContactCountLabel.ForeColor = previousTap.MaximumActiveContacts >= 1 && previousTap.MaximumActiveContacts <= 3
                         ? Color.Green
                         : Color.DarkRed;
                 }
@@ -293,6 +297,32 @@ namespace Eve.TapToClick.Forms
                     MouseInput = new MouseInput
                     {
                         Flags = MouseInputFlag.RightUp
+                    }
+                }
+            });
+        }
+
+        private void SendMiddleClick()
+        {
+            User32.SendInput(new Input
+            {
+                Type = InputType.Mouse,
+                InputValue = new Input.InputUnion
+                {
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.MiddleDown
+                    }
+                }
+            },
+            new Input
+            {
+                Type = InputType.Mouse,
+                InputValue = new Input.InputUnion
+                {
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.MiddleUp
                     }
                 }
             });
