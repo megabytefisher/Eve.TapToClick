@@ -66,9 +66,17 @@ namespace Eve.TapToClick.Forms
             this.activeContactDisplay1 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.activeContactDisplay5 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dragGroupBox = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.otherSettingsGroupbox = new System.Windows.Forms.GroupBox();
+            this.missedMovementScaleFactorTextbox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.missedMovementMillisecondsTextbox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.dragGapTimeTextbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.doubleTapDragLabel = new System.Windows.Forms.Label();
+            this.missedMovementLabel = new System.Windows.Forms.Label();
             this.notifyIconContextMenuStrip.SuspendLayout();
             this.configGroupBox.SuspendLayout();
             this.settingsGroupBox.SuspendLayout();
@@ -76,7 +84,7 @@ namespace Eve.TapToClick.Forms
             this.tabPage1.SuspendLayout();
             this.previousTapGroupBox.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.dragGroupBox.SuspendLayout();
+            this.otherSettingsGroupbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -281,6 +289,10 @@ namespace Eve.TapToClick.Forms
             // 
             // previousTapGroupBox
             // 
+            this.previousTapGroupBox.Controls.Add(this.missedMovementLabel);
+            this.previousTapGroupBox.Controls.Add(this.doubleTapDragLabel);
+            this.previousTapGroupBox.Controls.Add(this.label14);
+            this.previousTapGroupBox.Controls.Add(this.label13);
             this.previousTapGroupBox.Controls.Add(this.previousMaxDistanceLabel);
             this.previousTapGroupBox.Controls.Add(this.label4);
             this.previousTapGroupBox.Controls.Add(this.previousContactCountLabel);
@@ -293,7 +305,7 @@ namespace Eve.TapToClick.Forms
             this.previousTapGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.previousTapGroupBox.Name = "previousTapGroupBox";
             this.previousTapGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.previousTapGroupBox.Size = new System.Drawing.Size(688, 83);
+            this.previousTapGroupBox.Size = new System.Drawing.Size(688, 131);
             this.previousTapGroupBox.TabIndex = 10;
             this.previousTapGroupBox.TabStop = false;
             this.previousTapGroupBox.Text = "Previous Tap";
@@ -449,7 +461,7 @@ namespace Eve.TapToClick.Forms
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dragGroupBox);
+            this.tabPage2.Controls.Add(this.otherSettingsGroupbox);
             this.tabPage2.Controls.Add(this.configGroupBox);
             this.tabPage2.Controls.Add(this.settingsGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
@@ -461,16 +473,61 @@ namespace Eve.TapToClick.Forms
             this.tabPage2.Text = "Configuration";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dragGroupBox
+            // otherSettingsGroupbox
             // 
-            this.dragGroupBox.Controls.Add(this.dragGapTimeTextbox);
-            this.dragGroupBox.Controls.Add(this.label6);
-            this.dragGroupBox.Location = new System.Drawing.Point(478, 14);
-            this.dragGroupBox.Name = "dragGroupBox";
-            this.dragGroupBox.Size = new System.Drawing.Size(247, 307);
-            this.dragGroupBox.TabIndex = 4;
-            this.dragGroupBox.TabStop = false;
-            this.dragGroupBox.Text = "Double Tap and Drag Settings";
+            this.otherSettingsGroupbox.Controls.Add(this.missedMovementScaleFactorTextbox);
+            this.otherSettingsGroupbox.Controls.Add(this.label12);
+            this.otherSettingsGroupbox.Controls.Add(this.missedMovementMillisecondsTextbox);
+            this.otherSettingsGroupbox.Controls.Add(this.label8);
+            this.otherSettingsGroupbox.Controls.Add(this.dragGapTimeTextbox);
+            this.otherSettingsGroupbox.Controls.Add(this.label6);
+            this.otherSettingsGroupbox.Location = new System.Drawing.Point(478, 14);
+            this.otherSettingsGroupbox.Name = "otherSettingsGroupbox";
+            this.otherSettingsGroupbox.Size = new System.Drawing.Size(247, 307);
+            this.otherSettingsGroupbox.TabIndex = 4;
+            this.otherSettingsGroupbox.TabStop = false;
+            this.otherSettingsGroupbox.Text = "Other Settings";
+            // 
+            // missedMovementScaleFactorTextbox
+            // 
+            this.missedMovementScaleFactorTextbox.Location = new System.Drawing.Point(10, 200);
+            this.missedMovementScaleFactorTextbox.Name = "missedMovementScaleFactorTextbox";
+            this.missedMovementScaleFactorTextbox.Size = new System.Drawing.Size(234, 26);
+            this.missedMovementScaleFactorTextbox.TabIndex = 6;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Location = new System.Drawing.Point(6, 173);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(231, 20);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "Missed Movement Scale Factor";
+            // 
+            // missedMovementMillisecondsTextbox
+            // 
+            this.missedMovementMillisecondsTextbox.Location = new System.Drawing.Point(10, 140);
+            this.missedMovementMillisecondsTextbox.Name = "missedMovementMillisecondsTextbox";
+            this.missedMovementMillisecondsTextbox.Size = new System.Drawing.Size(234, 26);
+            this.missedMovementMillisecondsTextbox.TabIndex = 4;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Location = new System.Drawing.Point(6, 113);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(226, 20);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Missed Movement Milliseconds";
+            // 
+            // dragGapTimeTextbox
+            // 
+            this.dragGapTimeTextbox.Location = new System.Drawing.Point(10, 68);
+            this.dragGapTimeTextbox.Name = "dragGapTimeTextbox";
+            this.dragGapTimeTextbox.Size = new System.Drawing.Size(234, 26);
+            this.dragGapTimeTextbox.TabIndex = 2;
             // 
             // label6
             // 
@@ -478,16 +535,51 @@ namespace Eve.TapToClick.Forms
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Location = new System.Drawing.Point(6, 25);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(200, 20);
+            this.label6.Size = new System.Drawing.Size(200, 40);
             this.label6.TabIndex = 1;
-            this.label6.Text = "Max Gap Time Milliseconds";
+            this.label6.Text = "Double Tap and Drag\r\nMax Gap Time Milliseconds";
             // 
-            // dragGapTimeTextbox
+            // label13
             // 
-            this.dragGapTimeTextbox.Location = new System.Drawing.Point(7, 49);
-            this.dragGapTimeTextbox.Name = "dragGapTimeTextbox";
-            this.dragGapTimeTextbox.Size = new System.Drawing.Size(234, 26);
-            this.dragGapTimeTextbox.TabIndex = 2;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 81);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 20);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Double Tap Drag";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(195, 81);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(137, 20);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Missed Movement";
+            // 
+            // doubleTapDragLabel
+            // 
+            this.doubleTapDragLabel.AutoSize = true;
+            this.doubleTapDragLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doubleTapDragLabel.Location = new System.Drawing.Point(9, 106);
+            this.doubleTapDragLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.doubleTapDragLabel.Name = "doubleTapDragLabel";
+            this.doubleTapDragLabel.Size = new System.Drawing.Size(32, 20);
+            this.doubleTapDragLabel.TabIndex = 10;
+            this.doubleTapDragLabel.Text = "No";
+            // 
+            // missedMovementLabel
+            // 
+            this.missedMovementLabel.AutoSize = true;
+            this.missedMovementLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.missedMovementLabel.Location = new System.Drawing.Point(195, 106);
+            this.missedMovementLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.missedMovementLabel.Name = "missedMovementLabel";
+            this.missedMovementLabel.Size = new System.Drawing.Size(32, 20);
+            this.missedMovementLabel.TabIndex = 11;
+            this.missedMovementLabel.Text = "No";
             // 
             // MainForm
             // 
@@ -514,8 +606,8 @@ namespace Eve.TapToClick.Forms
             this.previousTapGroupBox.ResumeLayout(false);
             this.previousTapGroupBox.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.dragGroupBox.ResumeLayout(false);
-            this.dragGroupBox.PerformLayout();
+            this.otherSettingsGroupbox.ResumeLayout(false);
+            this.otherSettingsGroupbox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -556,9 +648,17 @@ namespace Eve.TapToClick.Forms
         private System.Windows.Forms.Label previousMaxPressureLabel;
         private System.Windows.Forms.Label previousMaxDistanceLabel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox dragGroupBox;
+        private System.Windows.Forms.GroupBox otherSettingsGroupbox;
         private System.Windows.Forms.TextBox dragGapTimeTextbox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox missedMovementMillisecondsTextbox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox missedMovementScaleFactorTextbox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label missedMovementLabel;
+        private System.Windows.Forms.Label doubleTapDragLabel;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
 
