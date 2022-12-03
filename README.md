@@ -12,7 +12,9 @@ This app uses Windows' [raw input API](https://docs.microsoft.com/en-us/windows/
 
 It allows some configuration, such as the pressure thresholds as well as the maximum time/distance for an input to be considered a tap.
 
-Currently, only single-finger tap (for left click), double-finger tap (for right click), and triple-finger tap (for middle click) are implemented. Other gestures, such as double-tap-and-drag do not work.
+Currently, only single-finger tap (for left click), double-finger tap (for right click), and triple-finger tap (for middle click) are implemented. Double tap and drag has also been implemented.
+
+Additionally, the Eve Windows 10 driver sometimes misses movements and doesn't respond to a touch. A workaround has been implemented to detect when a single touch has moved but the mouse has not updated, and will continuously update the mouse position to match.
 
 If you have issues or questions, open an issue and I'll try to help you out. If you want to improve it, feel free to open a pull request.
 
@@ -33,5 +35,8 @@ Min Pressure Detection Threshold | The minimum pressure reading that must be rea
 Tap Pressure Threshold | The minimum pressure that must be met to consider the input a tap.
 Max Tap Milliseconds | The maximum time a contact can be active and it still be considered a tap.
 Max Tap Distance | The maximum distance the contact can move and it still be considered a tap.
+Double Tap and Drag Gap Milliseconds | The maximum number of milliseconds to wait after a single tap to see if the user is double tapping to drag. If a single tap isn't followed by a second touch in this amount of time, the tap will be executed. If double tap drag is not used, set this to 0 to make single taps more responsive.
+Missed Movement Milliseconds | The number of milliseconds to wait after a touch to look for mouse movement when determining if a movement was missed.  Set this longer if it is falsely triggering.
+Missed Movement Scale | The scale factor to reduce the mouse movement speed by since the touchpad is higher resolution than the screen.
 
 Basically, for an input to be considered a tap, it needs to exceed the minimum pressure, then reach the tap pressure, then fall back below the minimum pressure within the max tap milliseconds while not traveling farther than the max tap distance.

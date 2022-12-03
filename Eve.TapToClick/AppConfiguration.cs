@@ -11,6 +11,8 @@ namespace Eve.TapToClick
         public int MaxTapMilliseconds { get; set; }
         public int MaxTapDeltaPosition { get; set; }
         public int MaxDoubleTapAndDragMilliseconds { get; set; }
+        public int MissedMovementMilliseconds { get; set; }
+        public double MissedMovementScale { get; set; }
 
         private static AppConfiguration instance;
 
@@ -23,6 +25,8 @@ namespace Eve.TapToClick
             MaxTapMilliseconds = 175;
             MaxTapDeltaPosition = 500;
             MaxDoubleTapAndDragMilliseconds = 250;
+            MissedMovementMilliseconds = 250;
+            MissedMovementScale = 0.2;
         }
 
         public void Save()

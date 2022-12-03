@@ -5,6 +5,7 @@ namespace Eve.TapToClick.Models
     public class TapData
     {
         public DateTime Start { get; set; }
+        public DateTime End { get; set; }
         public int MaximumActiveContacts { get; set; }
         public bool[] InstantaneousActiveContacts { get; set; }
         public double[] TotalContactDistances { get; set; }

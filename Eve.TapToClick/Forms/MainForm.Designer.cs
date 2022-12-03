@@ -66,6 +66,17 @@ namespace Eve.TapToClick.Forms
             this.activeContactDisplay1 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.activeContactDisplay5 = new Eve.TapToClick.Controls.ActiveContactDisplay();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.otherSettingsGroupbox = new System.Windows.Forms.GroupBox();
+            this.missedMovementScaleFactorTextbox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.missedMovementMillisecondsTextbox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dragGapTimeTextbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.doubleTapDragLabel = new System.Windows.Forms.Label();
+            this.missedMovementLabel = new System.Windows.Forms.Label();
             this.notifyIconContextMenuStrip.SuspendLayout();
             this.configGroupBox.SuspendLayout();
             this.settingsGroupBox.SuspendLayout();
@@ -73,6 +84,7 @@ namespace Eve.TapToClick.Forms
             this.tabPage1.SuspendLayout();
             this.previousTapGroupBox.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.otherSettingsGroupbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -85,23 +97,24 @@ namespace Eve.TapToClick.Forms
             // 
             // notifyIconContextMenuStrip
             // 
+            this.notifyIconContextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.notifyIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.notifyIconConfigureMenuItem,
             this.notifyIconExitMenuItem});
             this.notifyIconContextMenuStrip.Name = "notifyIconContextMenuStrip";
-            this.notifyIconContextMenuStrip.Size = new System.Drawing.Size(137, 48);
+            this.notifyIconContextMenuStrip.Size = new System.Drawing.Size(175, 68);
             // 
             // notifyIconConfigureMenuItem
             // 
             this.notifyIconConfigureMenuItem.Name = "notifyIconConfigureMenuItem";
-            this.notifyIconConfigureMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notifyIconConfigureMenuItem.Size = new System.Drawing.Size(174, 32);
             this.notifyIconConfigureMenuItem.Text = "Configure...";
             this.notifyIconConfigureMenuItem.Click += new System.EventHandler(this.notifyIconConfigureMenuItem_Click);
             // 
             // notifyIconExitMenuItem
             // 
             this.notifyIconExitMenuItem.Name = "notifyIconExitMenuItem";
-            this.notifyIconExitMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notifyIconExitMenuItem.Size = new System.Drawing.Size(174, 32);
             this.notifyIconExitMenuItem.Text = "Exit";
             this.notifyIconExitMenuItem.Click += new System.EventHandler(this.notifyIconExitMenuItem_Click);
             // 
@@ -117,18 +130,21 @@ namespace Eve.TapToClick.Forms
             this.configGroupBox.Controls.Add(this.label7);
             this.configGroupBox.Controls.Add(this.detectionThresholdTextBox);
             this.configGroupBox.Controls.Add(this.label5);
-            this.configGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.configGroupBox.Location = new System.Drawing.Point(9, 9);
+            this.configGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.configGroupBox.Name = "configGroupBox";
-            this.configGroupBox.Size = new System.Drawing.Size(205, 203);
+            this.configGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.configGroupBox.Size = new System.Drawing.Size(278, 312);
             this.configGroupBox.TabIndex = 2;
             this.configGroupBox.TabStop = false;
             this.configGroupBox.Text = "Detection/Tap Configuration";
             // 
             // applyConfigButton
             // 
-            this.applyConfigButton.Location = new System.Drawing.Point(95, 175);
+            this.applyConfigButton.Location = new System.Drawing.Point(14, 268);
+            this.applyConfigButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.applyConfigButton.Name = "applyConfigButton";
-            this.applyConfigButton.Size = new System.Drawing.Size(104, 22);
+            this.applyConfigButton.Size = new System.Drawing.Size(256, 34);
             this.applyConfigButton.TabIndex = 9;
             this.applyConfigButton.Text = "Apply";
             this.applyConfigButton.UseVisualStyleBackColor = true;
@@ -137,85 +153,96 @@ namespace Eve.TapToClick.Forms
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 133);
+            this.label11.Location = new System.Drawing.Point(9, 205);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(94, 13);
+            this.label11.Size = new System.Drawing.Size(136, 20);
             this.label11.TabIndex = 8;
             this.label11.Text = "Max Tap Distance";
             // 
             // maxTapDistanceTextBox
             // 
-            this.maxTapDistanceTextBox.Location = new System.Drawing.Point(9, 149);
+            this.maxTapDistanceTextBox.Location = new System.Drawing.Point(14, 229);
+            this.maxTapDistanceTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maxTapDistanceTextBox.Name = "maxTapDistanceTextBox";
-            this.maxTapDistanceTextBox.Size = new System.Drawing.Size(151, 20);
+            this.maxTapDistanceTextBox.Size = new System.Drawing.Size(224, 26);
             this.maxTapDistanceTextBox.TabIndex = 7;
             this.maxTapDistanceTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 133);
+            this.label10.Location = new System.Drawing.Point(9, 205);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(0, 13);
+            this.label10.Size = new System.Drawing.Size(0, 20);
             this.label10.TabIndex = 6;
             // 
             // maxTapMillisecondsTextBox
             // 
-            this.maxTapMillisecondsTextBox.Location = new System.Drawing.Point(9, 110);
+            this.maxTapMillisecondsTextBox.Location = new System.Drawing.Point(14, 169);
+            this.maxTapMillisecondsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maxTapMillisecondsTextBox.Name = "maxTapMillisecondsTextBox";
-            this.maxTapMillisecondsTextBox.Size = new System.Drawing.Size(151, 20);
+            this.maxTapMillisecondsTextBox.Size = new System.Drawing.Size(224, 26);
             this.maxTapMillisecondsTextBox.TabIndex = 5;
             this.maxTapMillisecondsTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 94);
+            this.label9.Location = new System.Drawing.Point(9, 145);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 13);
+            this.label9.Size = new System.Drawing.Size(158, 20);
             this.label9.TabIndex = 4;
             this.label9.Text = "Max Tap Milliseconds";
             // 
             // triggerThresholdTextBox
             // 
-            this.triggerThresholdTextBox.Location = new System.Drawing.Point(9, 71);
+            this.triggerThresholdTextBox.Location = new System.Drawing.Point(14, 109);
+            this.triggerThresholdTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.triggerThresholdTextBox.Name = "triggerThresholdTextBox";
-            this.triggerThresholdTextBox.Size = new System.Drawing.Size(151, 20);
+            this.triggerThresholdTextBox.Size = new System.Drawing.Size(224, 26);
             this.triggerThresholdTextBox.TabIndex = 3;
             this.triggerThresholdTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 55);
+            this.label7.Location = new System.Drawing.Point(9, 85);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 13);
+            this.label7.Size = new System.Drawing.Size(177, 20);
             this.label7.TabIndex = 2;
             this.label7.Text = "Tap Pressure Threshold";
             // 
             // detectionThresholdTextBox
             // 
-            this.detectionThresholdTextBox.Location = new System.Drawing.Point(9, 32);
+            this.detectionThresholdTextBox.Location = new System.Drawing.Point(14, 49);
+            this.detectionThresholdTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.detectionThresholdTextBox.Name = "detectionThresholdTextBox";
-            this.detectionThresholdTextBox.Size = new System.Drawing.Size(151, 20);
+            this.detectionThresholdTextBox.Size = new System.Drawing.Size(224, 26);
             this.detectionThresholdTextBox.TabIndex = 1;
             this.detectionThresholdTextBox.TextChanged += new System.EventHandler(this.configTextBox_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 16);
+            this.label5.Location = new System.Drawing.Point(9, 25);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(167, 13);
+            this.label5.Size = new System.Drawing.Size(248, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "Min Pressure Detection Threshold";
             // 
             // settingsGroupBox
             // 
             this.settingsGroupBox.Controls.Add(this.startupCheckbox);
-            this.settingsGroupBox.Location = new System.Drawing.Point(217, 6);
+            this.settingsGroupBox.Location = new System.Drawing.Point(295, 9);
+            this.settingsGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.settingsGroupBox.Name = "settingsGroupBox";
-            this.settingsGroupBox.Size = new System.Drawing.Size(137, 203);
+            this.settingsGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.settingsGroupBox.Size = new System.Drawing.Size(176, 312);
             this.settingsGroupBox.TabIndex = 3;
             this.settingsGroupBox.TabStop = false;
             this.settingsGroupBox.Text = "Application Settings";
@@ -223,9 +250,10 @@ namespace Eve.TapToClick.Forms
             // startupCheckbox
             // 
             this.startupCheckbox.AutoSize = true;
-            this.startupCheckbox.Location = new System.Drawing.Point(8, 19);
+            this.startupCheckbox.Location = new System.Drawing.Point(12, 29);
+            this.startupCheckbox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startupCheckbox.Name = "startupCheckbox";
-            this.startupCheckbox.Size = new System.Drawing.Size(93, 17);
+            this.startupCheckbox.Size = new System.Drawing.Size(137, 24);
             this.startupCheckbox.TabIndex = 0;
             this.startupCheckbox.Text = "Run at startup";
             this.startupCheckbox.UseVisualStyleBackColor = true;
@@ -235,10 +263,11 @@ namespace Eve.TapToClick.Forms
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(18, 18);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(493, 266);
+            this.tabControl1.Size = new System.Drawing.Size(740, 409);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -249,16 +278,21 @@ namespace Eve.TapToClick.Forms
             this.tabPage1.Controls.Add(this.activeContactDisplay2);
             this.tabPage1.Controls.Add(this.activeContactDisplay1);
             this.tabPage1.Controls.Add(this.activeContactDisplay5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(485, 240);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(732, 376);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Current Values";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // previousTapGroupBox
             // 
+            this.previousTapGroupBox.Controls.Add(this.missedMovementLabel);
+            this.previousTapGroupBox.Controls.Add(this.doubleTapDragLabel);
+            this.previousTapGroupBox.Controls.Add(this.label14);
+            this.previousTapGroupBox.Controls.Add(this.label13);
             this.previousTapGroupBox.Controls.Add(this.previousMaxDistanceLabel);
             this.previousTapGroupBox.Controls.Add(this.label4);
             this.previousTapGroupBox.Controls.Add(this.previousContactCountLabel);
@@ -267,9 +301,11 @@ namespace Eve.TapToClick.Forms
             this.previousTapGroupBox.Controls.Add(this.label2);
             this.previousTapGroupBox.Controls.Add(this.previousMaxPressureLabel);
             this.previousTapGroupBox.Controls.Add(this.label1);
-            this.previousTapGroupBox.Location = new System.Drawing.Point(13, 153);
+            this.previousTapGroupBox.Location = new System.Drawing.Point(20, 235);
+            this.previousTapGroupBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.previousTapGroupBox.Name = "previousTapGroupBox";
-            this.previousTapGroupBox.Size = new System.Drawing.Size(459, 54);
+            this.previousTapGroupBox.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.previousTapGroupBox.Size = new System.Drawing.Size(688, 131);
             this.previousTapGroupBox.TabIndex = 10;
             this.previousTapGroupBox.TabStop = false;
             this.previousTapGroupBox.Text = "Previous Tap";
@@ -278,18 +314,20 @@ namespace Eve.TapToClick.Forms
             // 
             this.previousMaxDistanceLabel.AutoSize = true;
             this.previousMaxDistanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previousMaxDistanceLabel.Location = new System.Drawing.Point(227, 33);
+            this.previousMaxDistanceLabel.Location = new System.Drawing.Point(340, 51);
+            this.previousMaxDistanceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.previousMaxDistanceLabel.Name = "previousMaxDistanceLabel";
-            this.previousMaxDistanceLabel.Size = new System.Drawing.Size(14, 13);
+            this.previousMaxDistanceLabel.Size = new System.Drawing.Size(19, 20);
             this.previousMaxDistanceLabel.TabIndex = 7;
             this.previousMaxDistanceLabel.Text = "0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(227, 16);
+            this.label4.Location = new System.Drawing.Point(340, 25);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 13);
+            this.label4.Size = new System.Drawing.Size(165, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Max Contact Distance";
             // 
@@ -297,18 +335,20 @@ namespace Eve.TapToClick.Forms
             // 
             this.previousContactCountLabel.AutoSize = true;
             this.previousContactCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previousContactCountLabel.Location = new System.Drawing.Point(368, 33);
+            this.previousContactCountLabel.Location = new System.Drawing.Point(552, 51);
+            this.previousContactCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.previousContactCountLabel.Name = "previousContactCountLabel";
-            this.previousContactCountLabel.Size = new System.Drawing.Size(14, 13);
+            this.previousContactCountLabel.Size = new System.Drawing.Size(19, 20);
             this.previousContactCountLabel.TabIndex = 5;
             this.previousContactCountLabel.Text = "0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(368, 16);
+            this.label3.Location = new System.Drawing.Point(552, 25);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.Size = new System.Drawing.Size(112, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Contact Count";
             // 
@@ -316,18 +356,20 @@ namespace Eve.TapToClick.Forms
             // 
             this.previousDurationLabel.AutoSize = true;
             this.previousDurationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previousDurationLabel.Location = new System.Drawing.Point(130, 33);
+            this.previousDurationLabel.Location = new System.Drawing.Point(195, 51);
+            this.previousDurationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.previousDurationLabel.Name = "previousDurationLabel";
-            this.previousDurationLabel.Size = new System.Drawing.Size(14, 13);
+            this.previousDurationLabel.Size = new System.Drawing.Size(19, 20);
             this.previousDurationLabel.TabIndex = 3;
             this.previousDurationLabel.Text = "0";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(130, 16);
+            this.label2.Location = new System.Drawing.Point(195, 25);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.Size = new System.Drawing.Size(105, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Duration (ms)";
             // 
@@ -335,18 +377,20 @@ namespace Eve.TapToClick.Forms
             // 
             this.previousMaxPressureLabel.AutoSize = true;
             this.previousMaxPressureLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.previousMaxPressureLabel.Location = new System.Drawing.Point(6, 33);
+            this.previousMaxPressureLabel.Location = new System.Drawing.Point(9, 51);
+            this.previousMaxPressureLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.previousMaxPressureLabel.Name = "previousMaxPressureLabel";
-            this.previousMaxPressureLabel.Size = new System.Drawing.Size(14, 13);
+            this.previousMaxPressureLabel.Size = new System.Drawing.Size(19, 20);
             this.previousMaxPressureLabel.TabIndex = 1;
             this.previousMaxPressureLabel.Text = "0";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(9, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.Size = new System.Drawing.Size(143, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Maximum Pressure";
             // 
@@ -354,10 +398,11 @@ namespace Eve.TapToClick.Forms
             // 
             this.activeContactDisplay4.Active = false;
             this.activeContactDisplay4.ContactIndex = 3;
-            this.activeContactDisplay4.Location = new System.Drawing.Point(290, 6);
+            this.activeContactDisplay4.Location = new System.Drawing.Point(435, 9);
+            this.activeContactDisplay4.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.activeContactDisplay4.Name = "activeContactDisplay4";
             this.activeContactDisplay4.Pressure = ((uint)(0u));
-            this.activeContactDisplay4.Size = new System.Drawing.Size(88, 141);
+            this.activeContactDisplay4.Size = new System.Drawing.Size(132, 217);
             this.activeContactDisplay4.TabIndex = 9;
             this.activeContactDisplay4.X = ((uint)(0u));
             this.activeContactDisplay4.Y = ((uint)(0u));
@@ -366,10 +411,11 @@ namespace Eve.TapToClick.Forms
             // 
             this.activeContactDisplay3.Active = false;
             this.activeContactDisplay3.ContactIndex = 2;
-            this.activeContactDisplay3.Location = new System.Drawing.Point(196, 6);
+            this.activeContactDisplay3.Location = new System.Drawing.Point(294, 9);
+            this.activeContactDisplay3.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.activeContactDisplay3.Name = "activeContactDisplay3";
             this.activeContactDisplay3.Pressure = ((uint)(0u));
-            this.activeContactDisplay3.Size = new System.Drawing.Size(88, 141);
+            this.activeContactDisplay3.Size = new System.Drawing.Size(132, 217);
             this.activeContactDisplay3.TabIndex = 8;
             this.activeContactDisplay3.X = ((uint)(0u));
             this.activeContactDisplay3.Y = ((uint)(0u));
@@ -378,10 +424,11 @@ namespace Eve.TapToClick.Forms
             // 
             this.activeContactDisplay2.Active = false;
             this.activeContactDisplay2.ContactIndex = 1;
-            this.activeContactDisplay2.Location = new System.Drawing.Point(102, 6);
+            this.activeContactDisplay2.Location = new System.Drawing.Point(153, 9);
+            this.activeContactDisplay2.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.activeContactDisplay2.Name = "activeContactDisplay2";
             this.activeContactDisplay2.Pressure = ((uint)(0u));
-            this.activeContactDisplay2.Size = new System.Drawing.Size(88, 141);
+            this.activeContactDisplay2.Size = new System.Drawing.Size(132, 217);
             this.activeContactDisplay2.TabIndex = 7;
             this.activeContactDisplay2.X = ((uint)(0u));
             this.activeContactDisplay2.Y = ((uint)(0u));
@@ -390,10 +437,11 @@ namespace Eve.TapToClick.Forms
             // 
             this.activeContactDisplay1.Active = false;
             this.activeContactDisplay1.ContactIndex = 0;
-            this.activeContactDisplay1.Location = new System.Drawing.Point(13, 6);
+            this.activeContactDisplay1.Location = new System.Drawing.Point(20, 9);
+            this.activeContactDisplay1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.activeContactDisplay1.Name = "activeContactDisplay1";
             this.activeContactDisplay1.Pressure = ((uint)(0u));
-            this.activeContactDisplay1.Size = new System.Drawing.Size(88, 141);
+            this.activeContactDisplay1.Size = new System.Drawing.Size(132, 217);
             this.activeContactDisplay1.TabIndex = 6;
             this.activeContactDisplay1.X = ((uint)(0u));
             this.activeContactDisplay1.Y = ((uint)(0u));
@@ -402,35 +450,145 @@ namespace Eve.TapToClick.Forms
             // 
             this.activeContactDisplay5.Active = false;
             this.activeContactDisplay5.ContactIndex = 4;
-            this.activeContactDisplay5.Location = new System.Drawing.Point(384, 6);
+            this.activeContactDisplay5.Location = new System.Drawing.Point(576, 9);
+            this.activeContactDisplay5.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.activeContactDisplay5.Name = "activeContactDisplay5";
             this.activeContactDisplay5.Pressure = ((uint)(0u));
-            this.activeContactDisplay5.Size = new System.Drawing.Size(88, 141);
+            this.activeContactDisplay5.Size = new System.Drawing.Size(132, 217);
             this.activeContactDisplay5.TabIndex = 5;
             this.activeContactDisplay5.X = ((uint)(0u));
             this.activeContactDisplay5.Y = ((uint)(0u));
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.otherSettingsGroupbox);
             this.tabPage2.Controls.Add(this.configGroupBox);
             this.tabPage2.Controls.Add(this.settingsGroupBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(485, 240);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(732, 376);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Configuration";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // otherSettingsGroupbox
+            // 
+            this.otherSettingsGroupbox.Controls.Add(this.missedMovementScaleFactorTextbox);
+            this.otherSettingsGroupbox.Controls.Add(this.label12);
+            this.otherSettingsGroupbox.Controls.Add(this.missedMovementMillisecondsTextbox);
+            this.otherSettingsGroupbox.Controls.Add(this.label8);
+            this.otherSettingsGroupbox.Controls.Add(this.dragGapTimeTextbox);
+            this.otherSettingsGroupbox.Controls.Add(this.label6);
+            this.otherSettingsGroupbox.Location = new System.Drawing.Point(478, 14);
+            this.otherSettingsGroupbox.Name = "otherSettingsGroupbox";
+            this.otherSettingsGroupbox.Size = new System.Drawing.Size(247, 307);
+            this.otherSettingsGroupbox.TabIndex = 4;
+            this.otherSettingsGroupbox.TabStop = false;
+            this.otherSettingsGroupbox.Text = "Other Settings";
+            // 
+            // missedMovementScaleFactorTextbox
+            // 
+            this.missedMovementScaleFactorTextbox.Location = new System.Drawing.Point(10, 200);
+            this.missedMovementScaleFactorTextbox.Name = "missedMovementScaleFactorTextbox";
+            this.missedMovementScaleFactorTextbox.Size = new System.Drawing.Size(234, 26);
+            this.missedMovementScaleFactorTextbox.TabIndex = 6;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Location = new System.Drawing.Point(6, 173);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(231, 20);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "Missed Movement Scale Factor";
+            // 
+            // missedMovementMillisecondsTextbox
+            // 
+            this.missedMovementMillisecondsTextbox.Location = new System.Drawing.Point(10, 140);
+            this.missedMovementMillisecondsTextbox.Name = "missedMovementMillisecondsTextbox";
+            this.missedMovementMillisecondsTextbox.Size = new System.Drawing.Size(234, 26);
+            this.missedMovementMillisecondsTextbox.TabIndex = 4;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Location = new System.Drawing.Point(6, 113);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(226, 20);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Missed Movement Milliseconds";
+            // 
+            // dragGapTimeTextbox
+            // 
+            this.dragGapTimeTextbox.Location = new System.Drawing.Point(10, 68);
+            this.dragGapTimeTextbox.Name = "dragGapTimeTextbox";
+            this.dragGapTimeTextbox.Size = new System.Drawing.Size(234, 26);
+            this.dragGapTimeTextbox.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Location = new System.Drawing.Point(6, 25);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(200, 40);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Double Tap and Drag\r\nMax Gap Time Milliseconds";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 81);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(130, 20);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Double Tap Drag";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(195, 81);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(137, 20);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Missed Movement";
+            // 
+            // doubleTapDragLabel
+            // 
+            this.doubleTapDragLabel.AutoSize = true;
+            this.doubleTapDragLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doubleTapDragLabel.Location = new System.Drawing.Point(9, 106);
+            this.doubleTapDragLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.doubleTapDragLabel.Name = "doubleTapDragLabel";
+            this.doubleTapDragLabel.Size = new System.Drawing.Size(32, 20);
+            this.doubleTapDragLabel.TabIndex = 10;
+            this.doubleTapDragLabel.Text = "No";
+            // 
+            // missedMovementLabel
+            // 
+            this.missedMovementLabel.AutoSize = true;
+            this.missedMovementLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.missedMovementLabel.Location = new System.Drawing.Point(195, 106);
+            this.missedMovementLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.missedMovementLabel.Name = "missedMovementLabel";
+            this.missedMovementLabel.Size = new System.Drawing.Size(32, 20);
+            this.missedMovementLabel.TabIndex = 11;
+            this.missedMovementLabel.Text = "No";
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 286);
+            this.ClientSize = new System.Drawing.Size(771, 440);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Eve.TapToClick Configuration";
@@ -448,6 +606,8 @@ namespace Eve.TapToClick.Forms
             this.previousTapGroupBox.ResumeLayout(false);
             this.previousTapGroupBox.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.otherSettingsGroupbox.ResumeLayout(false);
+            this.otherSettingsGroupbox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -488,6 +648,17 @@ namespace Eve.TapToClick.Forms
         private System.Windows.Forms.Label previousMaxPressureLabel;
         private System.Windows.Forms.Label previousMaxDistanceLabel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox otherSettingsGroupbox;
+        private System.Windows.Forms.TextBox dragGapTimeTextbox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox missedMovementMillisecondsTextbox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox missedMovementScaleFactorTextbox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label missedMovementLabel;
+        private System.Windows.Forms.Label doubleTapDragLabel;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
 

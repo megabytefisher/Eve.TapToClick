@@ -27,6 +27,19 @@ namespace Eve.TapToClick.Forms
 
         private TapData currentTap;
         private TapData previousTap;
+        // Indicates a single left click has been made but we haven't executed it yet so
+        // we can wait to see if the user is double tapping and dragging.
+        private bool pendingLeftClick = false;
+        private bool dragging = false;
+
+        private int initialMouseX;
+        private int initialMouseY;
+        private uint lastTouchX;
+        private uint lastTouchY;
+        private double remainderX;
+        private double remainderY;
+        private bool checkedForMissedMovement;
+        private bool missedMovement;
 
         public MainForm()
         {
@@ -117,19 +130,76 @@ namespace Eve.TapToClick.Forms
         // independently, but that didn't turn out to be the case.
         private void HandleContactStart(object sender, TouchpadEventArgs e)
         {
+            if (currentTap == null)
+            {
+                // This is a new tap, save some data to track missed movements.
+                initialMouseX = MousePosition.X;
+                initialMouseY = MousePosition.Y;
+                lastTouchX = e.X;
+                lastTouchY = e.Y;
+                checkedForMissedMovement = false;
+                missedMovement = false;
+                remainderX = 0;
+                remainderY = 0;
+            }
+
             ProcessActiveContact(e);
         }
 
         private void HandleContactUpdate(object sender, TouchpadEventArgs e)
         {
             ProcessActiveContact(e);
+
+            if (currentTap.MaximumActiveContacts == 1)
+            {
+                // Wait for significant touchpad movement before trying to measure mouse movement.
+                if (!checkedForMissedMovement && (Math.Abs((int)e.X - (int)lastTouchX) > 10 || Math.Abs((int)e.Y - (int)lastTouchY) > 10))
+                {
+                    checkedForMissedMovement = true;
+                    // The mouse hasn't updated yet. Wait a bit before checking. This isn't reliable but
+                    // smaller values are less reliable.
+                    System.Threading.Tasks.Task.Delay(config.MissedMovementMilliseconds).ContinueWith((task) => {
+                        if (initialMouseX == MousePosition.X && initialMouseY == MousePosition.Y)
+                            missedMovement = true;
+                    });
+                }
+                if (missedMovement)
+                {
+                    // First, compute the scaled amount of distance the touch moved.
+                    // Since touches are more detailed than pixels, add in remainder from last time.
+                    double diffX = config.MissedMovementScale * ((double)e.X - lastTouchX) + remainderX;
+                    double diffY = config.MissedMovementScale * ((double)e.Y - lastTouchY) + remainderY;
+                    // Next, convert to whole pixels and save the remainder for next time.
+                    int pixelsToMoveX = (int)Math.Round(diffX);
+                    int pixelsToMoveY = (int)Math.Round(diffY);
+                    remainderX = diffX - pixelsToMoveX;
+                    remainderY = diffY - pixelsToMoveY;
+                    lastTouchX = e.X;
+                    lastTouchY = e.Y;
+                    // Update the mouse position.
+                    SendMouseUpdate(pixelsToMoveX, pixelsToMoveY);
+                }
+            }
         }
 
         private void ProcessActiveContact(TouchpadEventArgs eventArgs)
         {
             // If we're not inside an active 'tap', instantiate one.
             if (currentTap == null)
+            {
                 currentTap = new TapData(Constants.MaxContacts);
+
+                // Check if we have a pending single click that hasn't been applied which might become a drag.
+                if (pendingLeftClick)
+                {
+                    // We are below the double tap and drag threshold, enter special handling for double tap and drag
+                    pendingLeftClick = false;
+                    dragging = true;
+
+                    // Send a left down to start dragging, which might turn into a normal click if this is just a double click
+                    SendLeftDown();
+                }
+            }
 
             bool wasActive = currentTap.InstantaneousActiveContacts[eventArgs.ContactIndex];
             currentTap.InstantaneousActiveContacts[eventArgs.ContactIndex] = true;
@@ -173,6 +243,15 @@ namespace Eve.TapToClick.Forms
 
         private void HandleContactEnd(object sender, TouchpadEventArgs e)
         {
+            if (dragging)
+            {
+                // If we were dragging, we have a mouse down that we need to complete with an up.
+                // If it was a normal double click, it will finish the first click before handling the
+                // second click normally below. If it was a double tap and drag, then a second click
+                // won't be registered below.
+                SendLeftUp();
+            }
+
             // If the tap object is null, just bail out
             if (currentTap == null)
                 return;
@@ -183,19 +262,29 @@ namespace Eve.TapToClick.Forms
             // Has the tap ended?
             if (currentActiveContacts == 0)
             {
-                DateTime tapEnd = DateTime.Now;
+                currentTap.End = DateTime.Now;
 
                 // Okay, was this *really* a tap?
                 // We need to validate by checking the total duration, whether the pressure threshold was met,
                 // and if the distance was within the maximum range.
-                if ((tapEnd - currentTap.Start).TotalMilliseconds <= config.MaxTapMilliseconds &&
+                if ((currentTap.End - currentTap.Start).TotalMilliseconds <= config.MaxTapMilliseconds &&
                     currentTap.TapThresholdMet &&
                     currentTap.TotalContactDistances.Max() <= config.MaxTapDeltaPosition)
                 {
                     // If it was a single-finger tap, inject a left click.
                     if (currentTap.MaximumActiveContacts == 1)
                     {
-                        SendLeftClick();
+                        // We might double tap to drag, so don't send a single click until we've had a chance to find out.
+                        pendingLeftClick = true;
+                        System.Threading.Tasks.Task.Delay(config.MaxDoubleTapAndDragMilliseconds).ContinueWith((task) => {
+                            if (pendingLeftClick)
+                            {
+                                pendingLeftClick = false;
+                                SendLeftClick();
+                                return;
+                            }
+                        });
+
                     }
                     // If it was a double-finger tap, inject a right click.
                     else if (currentTap.MaximumActiveContacts == 2)
@@ -220,20 +309,28 @@ namespace Eve.TapToClick.Forms
                 {
                     // Update previous tap display
                     previousMaxPressureLabel.Text = previousTap.MaximumPressure.ToString();
-                    previousDurationLabel.Text = ((int)(tapEnd - previousTap.Start).TotalMilliseconds).ToString();
+                    previousDurationLabel.Text = ((int)(previousTap.End - previousTap.Start).TotalMilliseconds).ToString();
                     previousMaxDistanceLabel.Text = ((int)previousTap.TotalContactDistances.Max()).ToString();
                     previousContactCountLabel.Text = previousTap.MaximumActiveContacts.ToString();
+                    doubleTapDragLabel.Text = dragging ? "Yes" : "No";
+                    missedMovementLabel.Text = missedMovement ? "Yes" : "No";
 
                     previousMaxPressureLabel.ForeColor = previousTap.MaximumPressure >= config.TapTriggerThreshold
                         ? Color.DarkGreen
                         : Color.DarkRed;
-                    previousDurationLabel.ForeColor = (tapEnd - previousTap.Start).TotalMilliseconds < config.MaxTapMilliseconds
+                    previousDurationLabel.ForeColor = (previousTap.End - previousTap.Start).TotalMilliseconds < config.MaxTapMilliseconds
                         ? Color.DarkGreen
                         : Color.DarkRed;
                     previousMaxDistanceLabel.ForeColor = previousTap.TotalContactDistances.Max() < config.MaxTapDeltaPosition
                         ? Color.DarkGreen
                         : Color.DarkRed;
                     previousContactCountLabel.ForeColor = previousTap.MaximumActiveContacts >= 1 && previousTap.MaximumActiveContacts <= 3
+                        ? Color.Green
+                        : Color.DarkRed;
+                    doubleTapDragLabel.ForeColor = dragging
+                        ? Color.Green
+                        : Color.DarkRed;
+                    missedMovementLabel.ForeColor = missedMovement
                         ? Color.Green
                         : Color.DarkRed;
                 }
@@ -328,14 +425,64 @@ namespace Eve.TapToClick.Forms
             });
         }
 
+        private void SendLeftDown()
+        {
+            User32.SendInput(new Input
+            {
+                Type = InputType.Mouse,
+                InputValue = new Input.InputUnion
+                {
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.LeftDown
+                    }
+                }
+            });
+        }
+        private void SendLeftUp()
+        {
+            User32.SendInput(new Input
+            {
+                Type = InputType.Mouse,
+                InputValue = new Input.InputUnion
+                {
+                    MouseInput = new MouseInput
+                    {
+                        Flags = MouseInputFlag.LeftUp
+                    }
+                }
+            });
+        }
+
+        private void SendMouseUpdate(int X, int Y)
+        {
+            User32.SendInput(new Input
+            {
+                Type = InputType.Mouse,
+                InputValue = new Input.InputUnion
+                {
+                    MouseInput = new MouseInput
+                    {
+                        DeltaX = X,
+                        DeltaY = Y,
+                        Flags = MouseInputFlag.Move
+                    }
+                }
+            }); ;
+        }
+
         private void SaveConfigValues()
         {
             bool detectionThresholdParsed = uint.TryParse(detectionThresholdTextBox.Text, out uint detectionThreshold);
             bool triggerThresholdParsed = uint.TryParse(triggerThresholdTextBox.Text, out uint triggerThreshold);
             bool maxMillisecondsParsed = int.TryParse(maxTapMillisecondsTextBox.Text, out int maxMilliseconds);
             bool maxDistanceParsed = int.TryParse(maxTapDistanceTextBox.Text, out int maxDistance);
+            bool dragMillisecondsParsed = int.TryParse(dragGapTimeTextbox.Text, out int dragMilliseconds);
+            bool missedMovementMillisecondsParsed = int.TryParse(missedMovementMillisecondsTextbox.Text, out int missedMovementMilliseconds);
+            bool missedMovementScaleParsed = double.TryParse(missedMovementScaleFactorTextbox.Text, out double missedMovementScale);
 
-            if (!detectionThresholdParsed || !triggerThresholdParsed || !maxMillisecondsParsed || !maxDistanceParsed)
+            if (!detectionThresholdParsed || !triggerThresholdParsed || !maxMillisecondsParsed || !maxDistanceParsed || !dragMillisecondsParsed
+                || !missedMovementMillisecondsParsed || !missedMovementScaleParsed)
             {
                 MessageBox.Show("Invalid value entered in configuration.");
                 LoadConfigValues();
@@ -346,6 +493,9 @@ namespace Eve.TapToClick.Forms
             config.TapTriggerThreshold = triggerThreshold;
             config.MaxTapMilliseconds = maxMilliseconds;
             config.MaxTapDeltaPosition = maxDistance;
+            config.MaxDoubleTapAndDragMilliseconds = dragMilliseconds;
+            config.MissedMovementMilliseconds = missedMovementMilliseconds;
+            config.MissedMovementScale = missedMovementScale;
 
             config.Save();
         }
@@ -356,6 +506,9 @@ namespace Eve.TapToClick.Forms
             triggerThresholdTextBox.Text = config.TapTriggerThreshold.ToString();
             maxTapMillisecondsTextBox.Text = config.MaxTapMilliseconds.ToString();
             maxTapDistanceTextBox.Text = config.MaxTapDeltaPosition.ToString();
+            dragGapTimeTextbox.Text = config.MaxDoubleTapAndDragMilliseconds.ToString();
+            missedMovementMillisecondsTextbox.Text = config.MissedMovementMilliseconds.ToString();
+            missedMovementScaleFactorTextbox.Text = config.MissedMovementScale.ToString();
         }
 
         private void applyConfigButton_Click(object sender, EventArgs e)
